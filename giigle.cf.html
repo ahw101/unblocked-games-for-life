@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Access Link</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-  <script src="https://publisher.linkvertise.com/cdn/linkvertise.js"></script>
+    <script src="https://publisher.linkvertise.com/cdn/linkvertise.js"></script>
+    <script>linkvertise(1400498, {whitelist: ["giigle.cf"], blacklist: []});</script>
     <link rel="icon" type="image/png" href="favicon1.png">
     <style>
         /* --- 1. Global Reset & Variables --- */
@@ -54,6 +54,15 @@
             color: #222;
             margin-bottom: 25px;
         }
+        
+        /* Added margin to separate the warning text from the button */
+        .access-container h3 {
+            margin-bottom: 25px;
+            font-weight: 400; /* Subtle adjustment */
+            color: #555;
+            font-size: 1rem;
+        }
+
 
         .btn-access {
             display: inline-block;
@@ -68,6 +77,13 @@
             transition: all 0.3s ease;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
             font-size: 1.1rem;
+            /* Add spacing to the first button */
+            margin-bottom: 15px; 
+        }
+
+        /* Added a small gap between the two buttons */
+        .access-container a:first-of-type {
+            margin-right: 15px;
         }
 
         .btn-access:hover {
@@ -99,6 +115,13 @@
             .btn-access {
                 padding: 12px 30px;
                 font-size: 1rem;
+                display: block; /* Make buttons stack on mobile */
+                margin-right: 0 !important;
+                margin-bottom: 15px;
+            }
+            /* Remove margin between buttons when they stack */
+            .access-container a:first-of-type {
+                margin-right: 0;
             }
         }
     </style>
@@ -108,7 +131,8 @@
     <div class="access-container">
         <h2>Ready to proceed?</h2>
         <h3>DON'T USE GIIGLE.CF IF YOU <STRONG>DON'T</STRONG> WANT TO FINISH LINKVERTISE</h3>
-        <a href="https://giigle.cf" class="btn-access">Access Link</a>
+        <a href="https://giigle.cf" class="btn-access">Access Link 1 (Full Script API)</a>
+        <a href="https://link-target.net/1400498/4xopAMy77ePr" class="btn-access">Access Link 2 (Direct Link)</a>
     </div>
 
 </body>
