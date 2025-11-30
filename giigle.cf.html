@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Link</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://publisher.linkvertise.com/cdn/linkvertise.js"></script><script>linkvertise(1400498, {whitelist: [], blacklist: [""]});</script>
+    <link rel="icon" type="image/png" href="favicon1.png">
+    <style>
+        /* --- 1. Global Reset & Variables --- */
+        :root {
+            --primary-color: #4facfe;
+            --secondary-color: #00f2fe;
+            --dark-bg: #1a1a2e;
+            --text-color: #333;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+            color: var(--text-color);
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Ensures content is centered vertically */
+        }
+
+        /* --- 2. Button Styling --- */
+        .access-container {
+            text-align: center;
+            background: white;
+            padding: 40px 60px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            max-width: 500px;
+            width: 90%;
+            opacity: 0;
+            animation: fadeInScale 1s ease-out forwards;
+        }
+
+        .access-container h2 {
+            font-size: 2.2rem;
+            color: #222;
+            margin-bottom: 25px;
+        }
+
+        .btn-access {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            font-size: 1.1rem;
+        }
+
+        .btn-access:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #3a97ff 0%, #00e0ef 100%); /* Slightly darker gradient on hover */
+        }
+
+        /* --- 3. Animations --- */
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* --- 4. Responsive Design --- */
+        @media (max-width: 600px) {
+            .access-container {
+                padding: 30px;
+            }
+            .access-container h2 {
+                font-size: 1.8rem;
+            }
+            .btn-access {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="access-container">
+        <h2>Ready to proceed?</h2>
+        <h3>DON'T USE GIIGLE.CF IF YOU <STRONG>DON'T</STRONG> WANT TO FINISH LINKVERTISE</h3>
+        <a href="https://giigle.cf" class="btn-access">Access Link</a>
+    </div>
+
+</body>
+</html>
