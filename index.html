@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Unblocked Games Hub - Play Freely!</title>
+    <meta name="theme-color" content="#000000"> 
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -31,6 +32,13 @@
             justify-content: center;
             align-items: center;
             z-index: 1000;
+            /* Added for smooth animation */
+            opacity: 1; 
+            transition: opacity 0.5s ease; /* Transition for fade out */
+        }
+        /* New class to trigger the fade out animation */
+        .modal-hide {
+            opacity: 0;
         }
         .modal-content {
             background-color: #1e293b; 
@@ -47,7 +55,8 @@
             font-weight: 700;
             padding: 0.75rem 2rem;
             border-radius: 0.5rem;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            /* Added transition for press/click effect */
+            transition: background-color 0.1s ease, transform 0.1s ease; 
             text-decoration: none;
             border: none;
             cursor: pointer;
@@ -64,9 +73,10 @@
             background-color: #3b82f6;
             transform: translateY(-2px);
         }
-        .button-secondary-modal:hover {
-            background-color: #ed8936;
-            transform: translateY(-2px);
+        /* Add active state for button click animation */
+        .button-primary-modal:active, .button-secondary-modal:active {
+            transform: scale(0.98);
+            background-color: #2563eb; /* Darker blue on press */
         }
         /* --- Modal Styles End --- */
 
@@ -266,17 +276,28 @@
 
             // 2. Only show the modal if the 'modal-passed' parameter is NOT in the URL
             if (!modalPassed) {
-                modal.classList.remove('hidden');
+                modal.classList.remove('hidden'); // Show the modal
+            } else {
+                 // If the parameter IS present, make sure the modal is completely hidden
+                 modal.classList.add('hidden');
             }
 
-            // 3. Handle the "Access Edward's website" click: Redirects to the current URL with the parameter
-            accessBtn.addEventListener('click', () => {
-                // Get the current URL path (e.g., /index.html) and add the parameter
-                const newUrl = window.location.pathname + '?modal-passed=true';
-                window.location.href = newUrl;
-            });
+            // Function to handle the successful button click and redirection/closure
+            function handleAccessWebsite() {
+                // 3. Add the fade-out animation class
+                modal.classList.add('modal-hide');
+                
+                // 4. Set a delay (0.5 seconds) that matches the CSS transition time
+                setTimeout(() => {
+                    // 5. After the fade-out is complete, perform the redirect
+                    const newUrl = window.location.pathname + '?modal-passed=true';
+                    window.location.href = newUrl;
+                }, 500); // 500 milliseconds = 0.5 seconds
+            }
 
-            // 4. Handle the "Play games" click: Redirects the user to games.html
+            // 6. Attach event listeners
+            accessBtn.addEventListener('click', handleAccessWebsite);
+
             playGamesBtn.addEventListener('click', () => {
                 window.location.href = 'games.html';
             });
