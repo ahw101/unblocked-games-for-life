@@ -32,7 +32,7 @@ window.onload = async () => {
       start.style.display = "flex";
 
       if (my_ip && ip_data) {
-        push("Haha", "Gottem")
+        push("Haha", "U THOUGHT THERE WAS ACTUALLY GTA6?")
         push("IP Address", ip_data.query);
         push("Hostname", my_ip.YourFuckingHostname);
         push("Country", `${ip_data.country} (${ip_data.countryCode})`);
