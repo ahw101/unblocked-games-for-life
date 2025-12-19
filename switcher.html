@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>GitLab Version Switcher</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,700,400" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://next.gitlab.com/style.css" />
+    <link id="favicon" rel="icon" type="image/png" href="https://next.gitlab.com/favicon.default.png">
+    
+    <style>
+        /* Adding a bit of transition feedback */
+        body { transition: background-color 0.3s ease; }
+        .status-msg { margin-top: 15px; font-size: 0.9em; color: #666; min-height: 20px; }
+        .active-version { font-weight: bold; color: #108548; }
+    </style>
+</head>
+<body>
+    <section class="wrapper">
+        <img src="https://next.gitlab.com/images/hero-bg-left.svg" class="bg bg-left"/>
+        <img src="https://next.gitlab.com/images/hero-bg-right.svg" class="bg bg-right"/>
+
+        <div class="container">
+            <div class="white-box">
+                <h1>Select which version of you want to use</h1>
+
+                <div class="settings">
+                    <div class="text-switch">Current</div>
+                    <div class="switch">
+                        <input id="next-switch" class="cmn-toggle cmn-toggle-round" type="checkbox" />
+                        <label for="next-switch"></label>
+                    </div>
+                    <div class="text-switch">Next (Canary)</div>
+                </div>
+                
+                <div id="status-display" class="status-msg">
+                    You are currently using the <span id="current-label" class="active-version">Production</span> version.
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <script>
+        const switchInput = document.getElementById('next-switch');
+        const statusLabel = document.getElementById('current-label');
+        const COOKIE_NAME = "gitlab_canary"; // The key your server looks for
+
+        // 1. On Load: Check if the cookie is already set
+        const getCookie = (name) => {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        };
+
+        const updateUI = (isNext) => {
+            switchInput.checked = isNext;
+            statusLabel.textContent = isNext ? "Next (Canary)" : "Production";
+            statusLabel.style.color = isNext ? "#db3b21" : "#108548";
+        };
+
+        // Initialize state
+        const currentPreference = getCookie(COOKIE_NAME);
+        updateUI(currentPreference === "true");
+
+        // 2. On Change: Update the cookie and refresh or notify
+        switchInput.addEventListener('change', (e) => {
+            const isEnabled = e.target.checked;
+            
+            // Set cookie valid for 30 days on the root domain
+            document.cookie = `${COOKIE_NAME}=${isEnabled}; path=/; max-age=${60*60*24*30}; SameSite=Lax`;
+
+            updateUI(isEnabled);
+
+            // Optional: Auto-redirect to the home page to see changes immediately
+            // window.location.href = "https://gitlab.com"; 
+            
+            console.log(`Canary enabled: ${isEnabled}`);
+        });
+    </script>
+</body>
+</html>
