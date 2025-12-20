@@ -4,70 +4,69 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Unblocked Games Hub - Play Freely!</title>
+    <link rel="icon" type="image/png" href="favicon.png">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --canary-orange: #ff4500;
+            --hub-blue: #63b3ed;
+            --hub-purple: #805ad5;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #000000;
             color: #e2e8f0;
+            line-height: 1.6;
             margin: 0;
             overflow-x: hidden;
+            animation: fadeInPage 0.8s ease-out;
         }
 
-        /* 🖼️ Background SVGs from the links you provided */
+        /* --- Canary Modal --- */
+        #canary-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(12px);
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-card {
+            background: #1e293b;
+            padding: 3rem;
+            border-radius: 1.5rem;
+            border: 2px solid var(--canary-orange);
+            text-align: center;
+            box-shadow: 0 0 50px rgba(255, 69, 0, 0.3);
+            animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* --- Background SVGs --- */
         .bg-decor {
             position: fixed;
             top: 0;
             height: 100vh;
-            z-index: 0;
+            z-index: -1;
             pointer-events: none;
-            opacity: 0.4; /* Subtle look */
+            opacity: 0.2;
         }
         .bg-left { left: 0; }
         .bg-right { right: 0; }
 
-        /* Canary Indicator Style 🚀 */
-        #canary-status {
-            display: none;
-            background: #ff4500;
-            color: white;
-            text-align: center;
-            font-weight: bold;
-            padding: 6px;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            position: relative;
-            z-index: 50;
-        }
-
         .header {
-            background-color: rgba(30, 41, 59, 0.8);
-            backdrop-filter: blur(10px);
-            padding: 1.5rem 0;
-            border-bottom: 1px solid #334155;
-            position: relative;
-            z-index: 10;
+            background-color: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(15px);
+            padding: 1.2rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .hero-section {
-            padding: 6rem 0;
+            padding: 5rem 0;
             text-align: center;
-            position: relative;
-            z-index: 10;
-        }
-
-        .game-card {
-            background-color: rgba(39, 55, 74, 0.9);
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            border: 1px solid #334155;
-            transition: all 0.3s ease;
-        }
-        .game-card:hover {
-            transform: translateY(-8px);
-            background-color: #334155;
-            box-shadow: 0 0 20px rgba(99, 179, 237, 0.3);
         }
 
         .animate-gradient-text {
@@ -77,111 +76,233 @@
             -webkit-text-fill-color: transparent;
             animation: gradient-flow 4s ease infinite;
         }
+
         @keyframes gradient-flow {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
+        @keyframes fadeInPage { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes modalPop { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        /* --- Button Styling --- */
         .button-primary {
             display: inline-block;
-            background-color: #63b3ed;
+            background-color: var(--hub-blue);
             color: #0f172a;
             font-weight: 700;
-            padding: 0.75rem 2rem;
-            border-radius: 0.5rem;
-            transition: all 0.2s;
+            padding: 0.75rem 1.75rem;
+            border-radius: 0.6rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             text-decoration: none;
+            border: none;
+            cursor: pointer;
+            text-align: center;
         }
         .button-primary:hover {
             background-color: #3b82f6;
-            transform: scale(1.05);
+            transform: translateY(-3px) scale(1.03);
+            color: white;
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+        .button-purple { background-color: var(--hub-purple); color: white; }
+        .button-purple:hover { background-color: #6b46c1; }
+
+        /* --- Grid & Card Styling --- */
+        .section-box {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 1.25rem;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .link-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            transition: background 0.2s;
+        }
+        .link-item:hover { background: rgba(255, 255, 255, 0.03); }
+
+        .game-card {
+            background-color: #1e293b;
+            border-radius: 1rem;
+            padding: 1.25rem;
+            border: 1px solid #334155;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .game-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--hub-blue);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+        }
+
+        .status-badge {
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            text-transform: uppercase;
+        }
+        .status-online { background: #10b981; color: white; }
+        .status-alt { background: white; color: black; }
+
+        .footer {
+            background-color: #0f172a;
+            border-top: 1px solid #1e293b;
+            padding: 3rem 0;
         }
     </style>
 </head>
 <body class="flex flex-col min-h-screen">
 
-    <div id="canary-status">🔥 Canary Version Enabled - New Proxies Loading... 🔥</div>
+    <div id="canary-modal">
+        <div class="modal-card">
+            <h2 class="text-3xl font-bold text-white mb-2">🧪 Canary Mode</h2>
+            <p class="text-slate-400 mb-6">You are on the experimental version of the hub.</p>
+            <button onclick="closeModal()" class="button-primary">Continue <span>&rarr;</span></button>
+        </div>
+    </div>
 
     <img src="https://next.gitlab.com/images/hero-bg-left.svg" class="bg-decor bg-left"/>
     <img src="https://next.gitlab.com/images/hero-bg-right.svg" class="bg-decor bg-right"/>
 
     <header class="header">
         <div class="container mx-auto px-6">
-            <h1 class="text-4xl font-extrabold animate-gradient-text">🎮 Unblocked Games Hub</h1>
+            <h1 class="text-3xl font-extrabold animate-gradient-text">🎮 Unblocked Games Hub</h1>
         </div>
     </header>
 
-    <main class="flex-grow relative z-10">
+    <main class="flex-grow container mx-auto px-6">
         <section class="hero-section">
-            <div class="container mx-auto px-6">
-                <h2 class="text-5xl font-extrabold mb-6">
-                    <span id="hero-text">Play Without Limits</span> 🕹️✨
-                </h2>
-                <p class="text-xl text-slate-300 max-w-2xl mx-auto mb-10">
-                    Your portal to uninterrupted fun. No blocks, no filters, just gaming. 🤘
-                </p>
-                
-                <div class="flex flex-wrap justify-center gap-4">
-                    <a href="#games-list" class="button-primary">Browse Games 🎲</a>
-                    <a href="https://ambient-ahw101.vercel.app/" class="button-primary" style="background-color: #805ad5; color: white;">Ambient Proxy 🌐</a>
+            <h2 class="text-5xl md:text-6xl font-extrabold text-white mb-6 leading-tight">
+                Your Portal to <span id="dynamic-hero" class="animate-gradient-text">Uninterrupted Fun!</span>
+            </h2>
+            <p class="text-lg text-slate-400 max-w-2xl mx-auto mb-10">
+                A premium collection of proxies and unblocked experiences. No limits, just gaming bliss.
+            </p>
+            <div class="bg-blue-900 bg-opacity-20 border border-blue-500 rounded-lg p-4 max-w-3xl mx-auto mb-10 text-sm">
+                <strong>Recommended Proxies:</strong> 
+                <a href="https://teacherrbad.vercel.app/" class="underline ml-2">teacherrbad</a> • 
+                <a href="https://ahw101.github.io/unblocked-games-for-life" class="underline ml-2">ug-for-life</a> • 
+                <a href="https://edward-the-goat.netlify.app/" class="underline ml-2">edward-the-goat</a>
+            </div>
+        </section>
+
+        <div class="section-box">
+            <h3 class="text-2xl font-bold text-white mb-8 border-b border-gray-700 pb-2">🚀 Explore the Hub</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h4 class="text-lg font-semibold text-blue-300 mb-4">Quick Links</h4>
+                    <div class="space-y-4">
+                        <div class="link-item">
+                            <a href="#games-list" class="button-primary w-full md:w-max">Games</a>
+                            <p class="text-xs text-slate-500">Jump straight to our top game picks.</p>
+                        </div>
+                        <div class="link-item">
+                            <a href="#about" class="button-primary w-full md:w-max">Developer Credits</a>
+                            <p class="text-xs text-slate-500">Find out who built this hub.</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold text-purple-300 mb-4">Other cool stuff</h4>
+                    <div class="space-y-6">
+                        <div class="link-item">
+                            <a href="https://gamesbyedward.vercel.app/" class="button-primary button-purple w-full md:w-max">GamesByEdward (New!)</a>
+                            <p class="text-xs text-slate-500">Edward's latest games portal—highly recommended.</p>
+                        </div>
+                        <div class="link-item">
+                            <a href="nettleweb.html" class="button-primary w-full md:w-max">Nettleweb (s)</a>
+                            <p class="text-xs text-slate-500">A massive collection of unblocked links and resources.</p>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://ambient-ahw101.vercel.app/" class="button-primary w-full md:w-max">Ambient Proxy</a>
+                            <p class="text-xs text-slate-500">Unblock YouTube, Social Media, and more.</p>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://chromebook-utilities.pages.dev/" class="button-primary w-full md:w-max">Pro Chromebook Proxies</a>
+                            <p class="text-xs text-slate-500">Unlock Roblox and advanced utilities.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section id="games-list" class="pb-20">
+            <h3 class="text-3xl font-bold text-center text-white mb-10">Our Top Picks</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="game-card">
+                    <a href="https://tinyurl.com/gdshsdgdshfdhg" target="_blank" class="font-bold text-blue-400">Edward's Games</a>
+                    <span class="status-badge status-online">Online ✅</span>
+                </div>
+                <div class="game-card">
+                    <a href="home.html" class="font-bold text-blue-400">More Fun & Games</a>
+                    <span class="status-badge status-online">Online ✅</span>
+                </div>
+                <div class="game-card">
+                    <a href="Lunaar.docx" class="font-bold text-blue-400">Lunaar.org</a>
+                    <span class="status-badge status-online">Best 🔥</span>
+                </div>
+                <div class="game-card">
+                    <a href="youtube.txt" class="font-bold text-blue-400">YouTube Links</a>
+                    <span class="status-badge status-online">Active</span>
                 </div>
             </div>
         </section>
 
-        <section id="games-list" class="py-12">
-            <div class="container mx-auto px-6">
-                <h3 class="text-3xl font-bold text-center mb-10">Featured Games 💎</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="game-card flex justify-between items-center">
-                        <a href="https://ahw101.github.io/edwardsgame.github.io/" class="text-xl font-bold text-blue-400 hover:underline">Monkeygg 🐒</a>
-                        <span class="text-xs bg-green-500 px-2 py-1 rounded text-white">ACTIVE ✅</span>
-                    </div>
-                    <div class="game-card flex justify-between items-center">
-                        <a href="home.html" class="text-xl font-bold text-blue-400 hover:underline">More Fun 🎈</a>
-                        <span class="text-xs bg-green-500 px-2 py-1 rounded text-white">ACTIVE ✅</span>
-                    </div>
-                    <div class="game-card flex justify-between items-center">
-                        <a href="Lunaar.docx" class="text-xl font-bold text-blue-400 hover:underline">Lunaar 🌙</a>
-                        <span class="text-xs bg-green-500 px-2 py-1 rounded text-white">ACTIVE ✅</span>
-                    </div>
-                </div>
+        <section id="about" class="pb-20 text-center">
+            <div class="section-box max-w-2xl mx-auto">
+                <h3 class="text-2xl font-bold text-white mb-4">Who made this?</h3>
+                <p class="text-slate-300">This website was coded by <strong>Edward</strong>.</p>
             </div>
         </section>
     </main>
 
-    <footer class="bg-slate-900 py-8 text-center relative z-10">
-        <p class="text-slate-400">&copy; 2025 Unblocked Games Hub | Created by Edward 🤘</p>
-        <p class="text-xs text-slate-600 mt-2">Hint: Tap Shift twice for settings... 🤫</p>
+    <footer class="footer text-center">
+        <div class="container mx-auto px-6">
+            <h2 class="text-lg font-bold text-white mb-2">Enjoy Responsibly!</h2>
+            <p class="text-xs text-slate-500 max-w-xl mx-auto">We provide accessible gaming tools. Please use them thoughtfully and respect your local guidelines. Have a fantastic time!</p>
+            <p class="mt-8 text-xs opacity-30">&copy; 2025 Unblocked Games Hub.</p>
+        </div>
     </footer>
 
     <script>
-        // --- 1. DOUBLE SHIFT KEYBOARD SHORTCUT ⌨️ ---
-        let shiftCount = 0;
+        // Secret Shift Shortcut
         let lastShift = 0;
-
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Shift') {
                 const now = Date.now();
                 if (now - lastShift < 400) {
-                    window.location.href = 'switcher.html'; 
+                    window.location.href = 'switcher.html';
                 }
                 lastShift = now;
             }
         });
 
-        // --- 2. COOKIE CHECK FOR CANARY 🍪 ---
+        // Cookie & Modal logic
         function getCookie(name) {
             const value = `; ${document.cookie}`;
             const parts = value.split(`; ${name}=`);
             if (parts.length === 2) return parts.pop().split(';').shift();
         }
 
+        function closeModal() {
+            document.getElementById('canary-modal').style.display = 'none';
+        }
+
         window.onload = () => {
             if (getCookie("gitlab_canary") === "true") {
-                document.getElementById('canary-status').style.display = 'block';
-                document.getElementById('hero-text').innerText = "Canary Mode Active! 🧪";
-                document.body.style.borderTop = "4px solid #ff4500";
+                document.getElementById('canary-modal').style.display = 'flex';
+                document.getElementById('dynamic-hero').innerText = "Canary Hub Active! 🧪";
+                document.body.style.borderTop = "5px solid var(--canary-orange)";
             }
         };
     </script>
