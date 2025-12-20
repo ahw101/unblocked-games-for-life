@@ -3,144 +3,240 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Unblocked Games Hub - Play Freely!</title>
+    <title>Unblocked Games Hub | ahw101</title>
+    <link rel="icon" type="image/png" href="favicon.png">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --hub-purple: #a855f7;
+            --hub-blue: #60a5fa;
+            --canary-orange: #ff4500;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #0f172a; /* Deeper dark blue for a premium feel */
+            background-color: #0b0e14;
             color: #e2e8f0;
             line-height: 1.6;
+            margin: 0;
+            overflow-x: hidden;
+            animation: fadeInPage 0.8s ease-out;
         }
-        .container {
-            max-width: 1200px; /* Wider container for better content spread */
-            margin: 0 auto;
-            padding: 0 1.5rem; /* Consistent padding */
+
+        /* --- Secret Canary Modal --- */
+        #canary-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(15px);
+            align-items: center;
+            justify-content: center;
         }
+        .modal-card {
+            background: #111827;
+            padding: 3rem;
+            border-radius: 1.5rem;
+            border: 2px solid var(--canary-orange);
+            text-align: center;
+            box-shadow: 0 0 50px rgba(255, 69, 0, 0.2);
+            animation: modalPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* --- Background Decorations --- */
+        .bg-decor {
+            position: fixed;
+            top: 0;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.2;
+        }
+        .bg-left { left: 0; }
+        .bg-right { right: 0; }
+
         .header {
-            background-color: #1e293b; /* Slightly lighter header for contrast */
+            background-color: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             padding: 1.5rem 0;
-            border-bottom: 1px solid #334155; /* Subtle border */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-        .hero-section {
-            padding: 4rem 0; /* Adjusted padding for this page */
-            background: linear-gradient(to bottom right, #1f2937, #0f172a); /* Soft gradient */
-            text-align: center;
-        }
-        .game-list-section {
-            padding: 4rem 0;
-        }
-        .game-card {
-            background-color: #27374a; /* Refined card background */
-            border-radius: 0.75rem; /* Slightly less aggressive rounding */
-            padding: 1.5rem;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25); /* More pronounced shadow */
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            border: 1px solid #334155; /* Subtle card border */
-        }
-        .game-card:hover {
-            transform: translateY(-8px) scale(1.02); /* More prominent lift and slight scale */
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35); /* Stronger shadow on hover */
-            background-color: #334155; /* Darken on hover */
-        }
-        .game-title {
-            font-weight: 700; /* Bolder titles */
-            color: #60a5fa; /* A vibrant blue */
-            font-size: 1.5rem; /* Larger title font */
-        }
-        .game-status {
-            font-size: 0.8rem;
-            font-weight: 600;
-            padding: 0.35rem 1rem;
-            border-radius: 9999px;
-            margin-left: 1rem;
-            flex-shrink: 0;
-            text-transform: uppercase; /* Uppercase status */
-            letter-spacing: 0.05em; /* Slight letter spacing */
-            white-space: nowrap; /* Prevent status text from wrapping */
-        }
-        .status-working {
-            background-color: #22c55e; /* Brighter green */
-            color: #fff;
-         }
-        .status-brah {
-            background-color: #ff0000; /* Brighter green */
-            color: #fff;
-        }
-        .status-unknown {
-            background-color: #facc15; /* More vibrant yellow */
-            color: #1a202c;
-        }
+
         .animate-gradient-text {
-            background: linear-gradient(90deg, #63b3ed, #805ad5, #dd6b20);
+            background: linear-gradient(90deg, var(--hub-blue), #805ad5, #f97316);
             background-size: 200% 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: gradient-flow 4s ease infinite; /* Slower, smoother animation */
+            animation: gradient-flow 4s ease infinite;
         }
+
         @keyframes gradient-flow {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-        .footer {
+
+        @keyframes fadeInPage { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes modalPop { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        /* --- Game Cards --- */
+        .game-card {
             background-color: #1e293b;
-            border-top: 1px solid #334155;
-            padding: 2rem 0;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
-        .footer p, .footer h2 {
-            color: #94a3b8; /* Softer text color for footer */
+        .game-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            border-color: var(--hub-blue);
+            background-color: #243146;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 0 15px rgba(96, 165, 250, 0.2);
+        }
+
+        .game-title {
+            font-weight: 700;
+            color: var(--hub-blue);
+            transition: color 0.3s;
+        }
+        .game-card:hover .game-title {
+            color: #fff;
+        }
+
+        .game-status {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.35rem 1rem;
+            border-radius: 9999px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .status-working { background-color: #10b981; color: #fff; }
+        .status-brah { background-color: #ef4444; color: #fff; }
+
+        .button-primary {
+            display: inline-block;
+            background-color: var(--hub-blue);
+            color: #0f172a;
+            font-weight: 700;
+            padding: 0.75rem 2rem;
+            border-radius: 0.6rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .button-primary:hover {
+            background-color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .footer {
+            background-color: #0f172a;
+            border-top: 1px solid #1e293b;
+            padding: 3rem 0;
+            margin-top: 4rem;
         }
     </style>
 </head>
-<body class="bg-slate-900 text-white flex flex-col min-h-screen">
+<body class="flex flex-col min-h-screen">
+
+    <div id="canary-modal">
+        <div class="modal-card">
+            <h2 class="text-3xl font-bold text-white mb-2">🧪 Canary Build</h2>
+            <p class="text-slate-400 mb-6">Experimental mode active. Developed by ahw101.</p>
+            <button onclick="closeModal()" class="button-primary">Enter Hub <span>&rarr;</span></button>
+        </div>
+    </div>
+
+    <img src="https://next.gitlab.com/images/hero-bg-left.svg" class="bg-decor bg-left"/>
+    <img src="https://next.gitlab.com/images/hero-bg-right.svg" class="bg-decor bg-right"/>
+
     <header class="header">
-        <div class="container flex justify-center items-center">
-            <h1 class="text-4xl font-extrabold animate-gradient-text text-center">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl font-extrabold animate-gradient-text">
                 🎮 Unblocked Games Hub
             </h1>
         </div>
     </header>
 
-    <main class="flex-grow flex flex-col items-center justify-center px-4 py-12">
-        <p class="text-xl text-slate-300 mb-10 text-center max-w-2xl">
-            Your gateway to fun, <strong>unblocked</strong> games and more! Enjoy a seamless experience, no matter where you are.
-        </p>
+    <main class="flex-grow container mx-auto px-6 py-12 flex flex-col items-center">
+        <div class="text-center mb-12">
+            <p class="text-2xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
+                Your gateway to fun, <span class="text-white font-bold">unblocked</span> games and more! 
+                Seamlessly curated by <span class="animate-gradient-text font-bold">ahw101</span>.
+            </p>
+        </div>
 
         <ul class="w-full max-w-3xl space-y-6">
             <li class="game-card flex flex-col sm:flex-row items-start sm:items-center justify-between">
-                <a href="https://astrax.neocities.org/games" target="_blank" rel="noopener noreferrer" class="text-xl game-title hover:underline flex-grow mb-2 sm:mb-0">Astrax (Astria) - (Ad-Free Games)</a>
+                <a href="https://astrax.neocities.org/games" target="_blank" class="text-xl game-title">Astrax (Astria) - (Ad-Free)</a>
                 <span class="game-status status-working">Working ✅</span>
             </li>
             <li class="game-card flex flex-col sm:flex-row items-start sm:items-center justify-between">
-                <a href="https://ahw101.github.io/documents-for-life/MACVC.html" target="_blank" rel="noopener noreferrer" class="text-xl game-title hover:underline flex-grow mb-2 sm:mb-0">MACVG - (Ad-Free Games)</a>
+                <a href="https://ahw101.github.io/documents-for-life/MACVC.html" target="_blank" class="text-xl game-title">MACVG - (Ad-Free)</a>
                 <span class="game-status status-working">Working ✅</span>
             </li>
             <li class="game-card flex flex-col sm:flex-row items-start sm:items-center justify-between">
-                <a href="https://cloud.freezenova.com" target="_blank" rel="noopener noreferrer" class="text-xl game-title hover:underline flex-grow mb-2 sm:mb-0">FreezeNova - (Ad-Supported)</a>
+                <a href="https://cloud.freezenova.com" target="_blank" class="text-xl game-title">FreezeNova - (Ad-Supported)</a>
                 <span class="game-status status-working">Working ✅</span>
             </li>
             <li class="game-card flex flex-col sm:flex-row items-start sm:items-center justify-between">
-                <a href="monkey.html" target="_blank" rel="noopener noreferrer" class="text-xl game-title hover:underline flex-grow mb-2 sm:mb-0">MonkeyGG2 - (Ad-Free Games)</a>
+                <a href="monkey.html" target="_blank" class="text-xl game-title">MonkeyGG2 - (Ad-Free)</a>
                 <span class="game-status status-working">Working ✅</span>
             </li>
-                <li class="game-card flex flex-col sm:flex-row items-start sm:items-center justify-between">
-                <a href="https://geometrylearningv3.neocities.org/g/" target="_blank" rel="noopener noreferrer" class="text-xl game-title hover:underline flex-grow mb-2 sm:mb-0">Geometry Learning - (Ad-Supported)</a>
+            <li class="game-card flex flex-col sm:flex-row items-start sm:items-center justify-between">
+                <a href="https://geometrylearningv3.neocities.org/g/" target="_blank" class="text-xl game-title">Geometry Learning</a>
                 <span class="game-status status-working">Working ✅</span>
             </li>
         </ul>
     </main>
 
     <footer class="footer text-center">
-        <div class="container">
-            <h2 class="text-lg font-bold mb-2"><strong>LOOK HERE</strong></h2>
-            <p>
+        <div class="container mx-auto px-6">
+            <h2 class="text-xl font-bold text-white mb-4">LOOK HERE</h2>
+            <p class="max-w-xl mx-auto text-slate-400">
                 Please use this website responsibly. I am not liable for any consequences arising from its use. Thanks for stopping by!
             </p>
-            <p class="mt-4 text-sm">Last updated by Edward on Saturday, June 28th, 2025.</p>
+            <p class="mt-8 text-sm opacity-50">Last updated by ahw101 on Saturday, June 28th, 2025.</p>
         </div>
     </footer>
+
+    <script>
+        // Secret Switcher Shortcut (Tap Shift twice within 400ms)
+        let lastShiftTime = 0;
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Shift') {
+                const now = Date.now();
+                if (now - lastShiftTime < 400) {
+                    window.location.href = 'switcher.html';
+                }
+                lastShiftTime = now;
+            }
+        });
+
+        // Canary Modal logic
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+
+        function closeModal() {
+            document.getElementById('canary-modal').style.display = 'none';
+        }
+
+        window.onload = () => {
+            if (getCookie("gitlab_canary") === "true") {
+                document.getElementById('canary-modal').style.display = 'flex';
+                document.body.style.borderTop = "5px solid var(--canary-orange)";
+            }
+        };
+    </script>
 </body>
 </html>
