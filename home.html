@@ -3,184 +3,157 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ahw101 // Unblocked Hub</title>
+    <title>ahw101 // Ad-Free Library</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --accent: #a855f7;
-            --bg: #050505;
-            --glass: rgba(20, 20, 25, 0.75);
+        :root { 
+            --accent: #a855f7; 
+            --bg: #000000; 
+            --glow: rgba(168, 85, 247, 0.4);
         }
-
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg);
-            color: #fff;
-            margin: 0;
-            overflow-x: hidden;
-        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: #fff; margin: 0; overflow-x: hidden; }
 
         /* --- Background SVGs --- */
-        .bg-decor {
-            position: fixed;
-            top: 0;
-            height: 100vh;
-            z-index: -1;
-            opacity: 0.3;
+        .bg-decor { position: fixed; top: 0; height: 100vh; z-index: -1; opacity: 0.35; transition: transform 0.6s ease-out; }
+        .bg-left { left: 0; } .bg-right { right: 0; }
+
+        /* --- Header --- */
+        .header { background: rgba(0,0,0,0.8); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.1); position: sticky; top: 0; z-index: 100; }
+        
+        .btn-back { 
+            background: rgba(255,255,255,0.05); 
+            padding: 8px 16px; 
+            border-radius: 12px; 
+            font-weight: 800; 
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-back:hover { background: var(--accent); transform: scale(1.1); box-shadow: 0 0 20px var(--glow); }
+
+        /* --- HYPER ANIMATED CARDS --- */
+        .glass-card { 
+            background: rgba(255, 255, 255, 0.02); 
+            backdrop-filter: blur(10px); 
+            border: 1px solid rgba(255, 255, 255, 0.05); 
+            border-radius: 24px; 
+            padding: 2rem; 
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* The Hover Animation Magic */
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s;
             pointer-events: none;
         }
-        .bg-left { left: 0; }
-        .bg-right { right: 0; }
 
-        .modern-gradient {
-            background: linear-gradient(135deg, #fff 40%, var(--accent) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .glass-card {
-            background: var(--glass);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
-            padding: 2rem;
-            transition: all 0.3s ease;
+        .glass-card:hover { 
+            transform: translateY(-12px) scale(1.05) rotateX(5deg) rotateY(2deg); 
+            border-color: var(--accent); 
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 30px var(--glow);
         }
 
-        .button-primary {
-            display: inline-block;
-            background-color: var(--accent);
-            color: white;
-            font-weight: 700;
-            padding: 0.75rem 1.5rem;
-            border-radius: 12px;
-            transition: 0.3s;
-            text-align: center;
-        }
-        .button-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(168, 85, 247, 0.3);
-            background-color: #9333ea;
+        .glass-card:hover::before {
+            opacity: 1;
         }
 
-        .game-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 1rem;
-            border-radius: 12px;
-            margin-bottom: 0.75rem;
-            border: 1px solid transparent;
-            transition: 0.2s;
-        }
-        .game-row:hover {
-            border-color: var(--accent);
-            background: rgba(255, 255, 255, 0.06);
-        }
+        .animate-reveal { opacity: 0; transform: translateY(30px); transition: 0.8s forwards ease-out; }
+        .reveal-visible { opacity: 1; transform: translateY(0); }
 
-        .status-tag {
-            font-size: 0.7rem;
-            font-weight: 800;
-            padding: 4px 10px;
-            border-radius: 100px;
-            background: #10b981;
-            color: white;
-            text-transform: uppercase;
-        }
+        .tag { font-size: 0.7rem; font-weight: 900; padding: 4px 10px; border-radius: 100px; text-transform: uppercase; background: rgba(255,255,255,0.1); letter-spacing: 1px; }
+        .tag-adfree { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
+.tag-some { font-size: 0.7rem; font-weight: 900; padding: 4px 10px; border-radius: 100px; text-transform: uppercase;
+    background: rgba(245, 158, 11, 0.2); 
+    color: #f59e0b; 
+    border: 1px solid rgba(245, 158, 11, 0.3); 
+}
+.tag-ads { font-size: 0.7rem; font-weight: 900; padding: 4px 10px; border-radius: 100px; text-transform: uppercase; background: rgba(255, 0, 0); letter-spacing: 1px; }
     </style>
 </head>
-<body class="min-h-screen">
+<body>
 
-    <img src="https://next.gitlab.com/images/hero-bg-left.svg" class="bg-decor bg-left" alt="">
-    <img src="https://next.gitlab.com/images/hero-bg-right.svg" class="bg-decor bg-right" alt="">
+    <img src="https://next.gitlab.com/images/hero-bg-left.svg" id="bg-l" class="bg-decor bg-left"/>
+    <img src="https://next.gitlab.com/images/hero-bg-right.svg" id="bg-r" class="bg-decor bg-right"/>
 
-    <header class="py-12 text-center">
-        <h1 class="text-5xl md:text-7xl font-extrabold tracking-tighter modern-gradient">ahw101_HUB</h1>
-        <p class="text-gray-400 mt-4 text-lg">Your gateway to fun, <strong>unblocked</strong> games and more.</p>
+    <header class="header py-4">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <a href="skibidi.html" class="btn-back" target="_self">← EXIT TO HOMEPAGE</a>
+            <h1 class="text-xl font-black tracking-tighter uppercase italic">ahw101 // UNBLOCKED GAMES FOR LIFE</h1>
+        </div>
     </header>
 
-    <main class="container mx-auto px-6 max-w-5xl pb-20">
-        
-        <div class="glass-card mb-10 text-center">
-            <h2 class="text-2xl font-bold mb-6">Utilities & Proxies</h2>
-            <p class="mb-8 text-gray-400">Use <a href="https://teacherrbad.vercel.app/" class="underline hover:text-purple-400">teacherrbad.vercel.app</a> or <a href="https://ahw101.github.io/unblocked-games-for-life" class="underline hover:text-purple-400">ug-for-life</a> for access.</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <a href="https://gamesbyedward.vercel.app/" class="button-primary" style="background: #6366f1;">GamesByEdward (New!)</a>
-                <a href="https://chromebook-utilities.pages.dev/" class="button-primary">Lots More Proxies</a>
-                <a href="https://ambient-ahw101.vercel.app/" class="button-primary">Ambient Proxy</a>
-                <a href="nettleweb.html" class="button-primary">Nettleweb Mirrors</a>
-                <a href="youtube.txt" class="button-primary">YouTube Links</a>
-                <a href="https://giigle.cf" class="button-primary">Giigle Search</a>
-            </div>
+    <main class="container mx-auto px-6 py-20">
+        <div class="text-center mb-20 animate-reveal">
+            <h2 class="text-6xl font-black mb-4 tracking-tighter">OTHER GAMES</h2>
+            <p class="text-gray-500 font-medium">None of these are made or monitered by me.</p>
         </div>
 
-        <div class="glass-card">
-            <h2 class="text-2xl font-bold mb-8 text-center" id="games-list">The Game Library</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             
-            <div class="space-y-2">
-                <a href="https://astrax.neocities.org/games" target="_blank" class="game-row">
-                    <span class="font-bold text-lg">Astrax (Astria)</span>
-                    <span class="status-tag">Working ✅</span>
-                </a>
+            <a href="https://astrax.neocities.org/games" target="_self" class="glass-card animate-reveal">
+                <div class="mb-4"><span class="tag tag-adfree">Ad-Free Verified</span></div>
+                <h3 class="text-2xl font-black mb-2">Astrax / Astria</h3>
+                <div class="mt-8 flex items-center text-xs font-bold text-purple-400 uppercase tracking-widest">
+                    Go there <span class="ml-2">→</span>
+                </div>
+            </a>
 
-                <a href="https://ahw101.github.io/documents-for-life/MACVC.html" target="_blank" class="game-row">
-                    <span class="font-bold text-lg">MACVG - Ad Free</span>
-                    <span class="status-tag">Working ✅</span>
-                </a>
+            <a href="https://ahw101.github.io/documents-for-life/MACVC.html" target="_self" class="glass-card animate-reveal" style="transition-delay: 0.1s">
+                <div class="mb-4"><span class="tag tag-adfree">Ad-Free Verified</span></div>
+                <h3 class="text-2xl font-black mb-2">MACVG Center</h3>
+                <div class="mt-8 flex items-center text-xs font-bold text-purple-400 uppercase tracking-widest">
+                    go there <span class="ml-2">→</span>
+                </div>
+            </a>
 
-                <a href="https://cloud.freezenova.com" target="_blank" class="game-row">
-                    <span class="font-bold text-lg">FreezeNova</span>
-                    <span class="status-tag">Working ✅</span>
-                </a>
+            <a href="https://cloud.freezenova.com" target="_self" class="glass-card animate-reveal" style="transition-delay: 0.2s">
+                <div class="mb-4"><span class="tag-ads">adverts</span></div>
+                <h3 class="text-2xl font-black mb-2">FreezeNova Cloud</h3>
+                <div class="mt-8 flex items-center text-xs font-bold text-purple-400 uppercase tracking-widest">
+                    go there <span class="ml-2">→</span>
+                </div>
+            </a>
+                        <a href="https://amplify8.neocities.org/" target="_self" class="glass-card animate-reveal" style="transition-delay: 0.2s">
+                <div class="mb-4"><span class="tag-some">Some adverts on some games</span></div>
+                <h3 class="text-2xl font-black mb-2">Hassan's Unblocked Games</h3>
+                <div class="mt-8 flex items-center text-xs font-bold text-purple-400 uppercase tracking-widest">
+                    go there <span class="ml-2">→</span>
+                </div>
+            </a>
 
-                <a href="monkey.html" class="game-row">
-                    <span class="font-bold text-lg">MonkeyGG2 Hub</span>
-                    <span class="status-tag">Working ✅</span>
-                </a>
-
-                <a href="https://geometrylearningv3.neocities.org/g/" target="_blank" class="game-row">
-                    <span class="font-bold text-lg">Geometry Learning</span>
-                    <span class="status-tag">Working ✅</span>
-                </a>
-
-                <a href="https://tinyurl.com/gdshsdgdshfdhg" target="_blank" class="game-row">
-                    <span class="font-bold text-lg">Personal Game Collection</span>
-                    <span class="status-tag">Online ✅</span>
-                </a>
-
-                <a href="Lunaar.docx" class="game-row">
-                    <span class="font-bold text-lg">Lunaar.org</span>
-                    <span class="status-tag">Online ✅</span>
-                </a>
-
-                <a href="home.html" class="game-row">
-                    <span class="font-bold text-lg">More Fun Hub</span>
-                    <span class="status-tag">Online ✅</span>
-                </a>
-            </div>
         </div>
-
-        <section class="mt-12 text-center" id="about">
-            <h3 class="text-xl font-bold mb-2">Who made this?</h3>
-            <p class="text-gray-500">Curated and developed by <strong>ahw101</strong>.</p>
-            <p class="text-xs text-gray-700 mt-4 uppercase tracking-widest">Last updated: June 28, 2025</p>
-        </section>
-
     </main>
 
     <script>
-        // Secret Switcher (Tap Shift 2 times)
-        let lastShift = 0;
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Shift') {
-                const now = Date.now();
-                if (now - lastShift < 400) window.location.href = 'switcher.html';
-                lastShift = now;
-            }
+        // Parallax Effect
+        document.addEventListener('mousemove', (e) => {
+            const x = (window.innerWidth - e.pageX * 2) / 100;
+            const y = (window.innerHeight - e.pageY * 2) / 100;
+            document.getElementById('bg-l').style.transform = `translateX(${x}px) translateY(${y}px)`;
+            document.getElementById('bg-r').style.transform = `translateX(${-x}px) translateY(${-y}px)`;
         });
+
+        // Reveal Animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('reveal-visible');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.animate-reveal').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
