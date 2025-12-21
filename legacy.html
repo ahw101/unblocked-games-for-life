@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unblocked Games Hub - Play Freely!</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0f172a; /* Deeper dark blue for a premium feel */
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px; /* Wider container for better content spread */
+            margin: 0 auto;
+            padding: 0 1.5rem; /* Consistent padding */
+        }
+        .header {
+            background-color: #1e293b; /* Slightly lighter header for contrast */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #334155; /* Subtle border */
+        }
+        .hero-section {
+            padding: 6rem 0; /* More vertical space for hero */
+            background: linear-gradient(to bottom right, #1f2937, #0f172a); /* Soft gradient */
+            text-align: center;
+        }
+        .game-list-section {
+            padding: 4rem 0;
+        }
+        .game-card {
+            background-color: #27374a; /* Refined card background */
+            border-radius: 0.75rem; /* Slightly less aggressive rounding */
+            padding: 1.5rem;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25); /* More pronounced shadow */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            border: 1px solid #334155; /* Subtle card border */
+        }
+        .game-card:hover {
+            transform: translateY(-8px) scale(1.02); /* More prominent lift and slight scale */
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35); /* Stronger shadow on hover */
+            background-color: #334155; /* Darken on hover */
+        }
+        .game-title {
+            font-weight: 700; /* Bolder titles */
+            color: #60a5fa; /* A vibrant blue */
+            font-size: 1.5rem; /* Larger title font */
+        }
+        .game-status {
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.35rem 1rem;
+            border-radius: 9999px;
+            margin-left: 1rem;
+            flex-shrink: 0;
+            text-transform: uppercase; /* Uppercase status */
+            letter-spacing: 0.05em; /* Slight letter spacing */
+        }
+        .status-working {
+            background-color: #22c55e; /* Brighter green */
+            color: #fff;
+        }
+        .status-unknown {
+            background-color: #facc15; /* More vibrant yellow */
+            color: #1a202c;
+        }
+        .animate-gradient-text {
+            background: linear-gradient(90deg, #63b3ed, #805ad5, #dd6b20);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-flow 4s ease infinite; /* Slower, smoother animation */
+        }
+        @keyframes gradient-flow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .footer {
+            background-color: #1e293b;
+            border-top: 1px solid #334155;
+            padding: 2rem 0;
+        }
+        .footer p, .footer h2 {
+            color: #94a3b8; /* Softer text color for footer */
+        }
+        .button-primary {
+            display: inline-block;
+            background-color: #63b3ed;
+            color: #0f172a;
+            font-weight: 700;
+            padding: 0.75rem 2rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-decoration: none;
+        }
+        .button-primary:hover {
+            background-color: #3b82f6;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-white flex flex-col min-h-screen">
+    <header class="header">
+        <div class="container flex justify-between items-center">
+            <h1 class="text-4xl font-extrabold animate-gradient-text">
+                🎮 Unblocked Games Hub
+            </h1>
+        </div>
+    </header>
+    <main class="flex-grow">
+        <section class="hero-section">
+            <div class="container">
+                <h2 class="text-5xl md:text-6xl font-extrabold text-white mb-6 leading-tight">
+                    Your Portal to <span class="animate-gradient-text">Uninterrupted Fun!</span>
+                </h2>
+                <p class="text-xl text-slate-300 max-w-3xl mx-auto mb-8">
+                    Guys, also use <a href="https://teacherrbad.vercel.app/" class="underline">teacherrbad.vercel.app</a>, <a href="https://ahw101.github.io/unblocked-games-for-life" class="underline">ahw101.github.io/unblocked-games-for-life</a> and <a href="https://edward-the-goat.netlify.app/" class="underline">edward-the-goat.netlify.app/</a>for proxies!
+                </p>
+                <p class="text-xl text-slate-300 max-w-3xl mx-auto mb-8">
+                    Discover a curated collection of <strong>unblocked games</strong>, ready for you to enjoy anytime, anywhere. No restrictions, just pure gaming bliss!
+                </p>
+                <h3 class="text-2xl font-bold text-white mb-4">Check out:</h3>
+                <a href="#games-list" class="button-primary mb-2">Games</a>
+                <p class="text-slate-300 mb-4">Simply games!</p>
+                <a href="#about" class="button-primary mb-2">Who made this?</a>
+                <p class="text-slate-300 mb-4">Click to see.</p>
+                <h3 class="text-2xl font-bold text-white mb-4">Other cool stuff:</h3>
+                <a href="nettleweb.html" class="button-primary mb-2">Nettleweb (s)</a>
+                <p class="text-slate-300 mb-4">A load of links!</p>
+                <a href="youtube.txt" class="button-primary mb-2">YouTube Links</a>
+                <p class="text-slate-300 mb-4">Use nettleweb for that as well!</p>
+                <a href="https://chromebook-utilities.pages.dev/" class="button-primary mb-2">Lots More proxies!</a>
+                <p class="text-slate-300 mb-4">Enjoy unblocked Roblox, and a load of other things!</p>
+                <a href="https://ambient-ahw101.vercel.app/" class="button-primary mb-2">Ambient (By me)</a>
+                <p class="text-slate-300 mb-4">This allows you to get unblocked sites, like social media and YouTube!</p>
+            </div>
+        </section>
+
+        <section id="games-list" class="game-list-section">
+            <div class="container">
+                <h3 class="text-3xl font-bold text-center text-white mb-10">Our Top Picks</h3>
+                <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <li class="game-card flex flex-col sm:flex-row items-start sm:items-center justify-between">
+                        <a href="https://ahw101.github.io/edwardsgame.github.io/" target="_blank" rel="noopener noreferrer" class="text-xl game-title hover:underline flex-grow mb-2 sm:mb-0">My Awesome Games Site</a>
+                        <span class="game-status status-working">Online ✅</span>
+                    </li>
+                    <li class="game-card flex flex-col sm:flex-row items-start sm:items-center justify-between">
+                        <a href="home.html" target="_blank" rel="noopener noreferrer" class="text-xl game-title hover:underline flex-grow mb-2 sm:mb-0">More Games & Fun</a>
+                        <span class="game-status status-working">Online ✅</span>
+                    </li>
+                    <li class="game-card flex flex-col sm:flex-row items-start sm:items-center justify-between">
+                        <a href="nettleweb.html" target="_blank" rel="noopener noreferrer" class="text-xl game-title hover:underline flex-grow mb-2 sm:mb-0">NettleWeb (Best of collection)</a>
+                        <span class="game-status status-working">Online ✅</span>
+                    </li>
+                          <li class="game-card flex flex-col sm:flex-row items-start sm:items-center justify-between">
+                        <a href="https://free-money-exploit.github.io/" target="_blank" rel="noopener noreferrer" class="text-xl game-title hover:underline flex-grow mb-2 sm:mb-0">ChickenOS (Best of collection)</a>
+                        <span class="game-status status-working">Online ✅</span>
+                    </li>
+                                        <li class="game-card flex flex-col sm:flex-row items-start sm:items-center justify-between">
+                        <a href="https://discord.gg/xkCha3bTt6" target="_blank" rel="noopener noreferrer" class="text-xl game-title hover:underline flex-grow mb-2 sm:mb-0">Discord</a>
+                    </li>
+                    
+                    
+                </ul>
+            </div>
+        </section>
+        <section id="about" class="game-list-section">
+            <div class="container">
+                <h3 class="text-3xl font-bold text-center text-white mb-10">Who made this?</h3>
+                <p class="text-xl text-slate-300 max-w-3xl mx-auto mb-8">This website was made by Edward. I am working on getting this website updated for a change, but i'm on holiday so that'll be a bit hard! Check out Eaglercraft, Minecraft on a web browser like your using now! I have made thousands of mirrors, but the best I have seen is hdun.org/mc and eaglercraft.ir/ . There are also loads more so just search "Eaglercraft Unblocked"</p>
+            </div>
+        </section>
+    </main>
+    <footer class="footer text-center">
+        <div class="container">
+            <h2 class="text-lg font-bold mb-2">Enjoy Responsibly!</h2>
+            <p>While we strive to provide accessible gaming, please remember to use these resources thoughtfully. We are not responsible for how you choose to engage with the content. Play fair, respect guidelines, and most importantly, have a fantastic time!</p>
+            <p class="mt-4 text-sm">&copy; 2025 Unblocked Games Hub. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
