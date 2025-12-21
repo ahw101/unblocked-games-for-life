@@ -3,47 +3,33 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Unblocked Games Hub - Play Freely!</title>
+    <title>ahw101 // HyperHub</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --canary-orange: #ff4500;
-            --hub-blue: #63b3ed;
-            --hub-purple: #805ad5;
+            --accent-purple: #a855f7;
+            --accent-blue: #63b3ed;
+            --bg-dark: #000000;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #000000;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-dark);
             color: #e2e8f0;
             line-height: 1.6;
             margin: 0;
             overflow-x: hidden;
-            animation: fadeInPage 0.8s ease-out;
+            scroll-behavior: smooth;
         }
 
-        /* --- Canary Modal --- */
-        #canary-modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(12px);
-            align-items: center;
-            justify-content: center;
-        }
-        .modal-card {
-            background: #1e293b;
-            padding: 3rem;
-            border-radius: 1.5rem;
-            border: 2px solid var(--canary-orange);
-            text-align: center;
-            box-shadow: 0 0 50px rgba(255, 69, 0, 0.3);
-            animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
+        /* --- Custom Scrollbar --- */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #222; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-purple); }
 
         /* --- Background SVGs --- */
         .bg-decor {
@@ -52,268 +38,250 @@
             height: 100vh;
             z-index: -1;
             pointer-events: none;
-            opacity: 0.2;
+            opacity: 0.35;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
         .bg-left { left: 0; }
         .bg-right { right: 0; }
 
+        /* --- Canary Modal --- */
+        #canary-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-card {
+            background: #0f172a;
+            padding: 3rem;
+            border-radius: 2rem;
+            border: 2px solid var(--canary-orange);
+            text-align: center;
+            box-shadow: 0 0 60px rgba(255, 69, 0, 0.3);
+            transform: scale(0.9);
+            animation: modalIn 0.5s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes modalIn { to { transform: scale(1); opacity: 1; } }
+
+        /* --- Header --- */
         .header {
-            background-color: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(15px);
-            padding: 1.2rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(20px);
+            padding: 1.25rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        .hero-section {
-            padding: 5rem 0;
-            text-align: center;
+        /* --- Animations --- */
+        .animate-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
         }
+        .reveal-visible { opacity: 1; transform: translateY(0); }
 
         .animate-gradient-text {
-            background: linear-gradient(90deg, #63b3ed, #805ad5, #dd6b20);
-            background-size: 200% 200%;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple), #ff8a00, var(--accent-blue));
+            background-size: 300% 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: gradient-flow 4s ease infinite;
+            animation: gradient-flow 6s linear infinite;
         }
-
         @keyframes gradient-flow {
             0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            100% { background-position: 300% 50%; }
         }
 
-        @keyframes fadeInPage { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes modalPop { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-
-        /* --- Button Styling --- */
-        .button-primary {
-            display: inline-block;
-            background-color: var(--hub-blue);
-            color: #0f172a;
-            font-weight: 700;
-            padding: 0.75rem 1.75rem;
-            border-radius: 0.6rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
-            text-align: center;
-        }
-        .button-primary:hover {
-            background-color: #3b82f6;
-            transform: translateY(-3px) scale(1.03);
-            color: white;
-            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
-        }
-        .button-purple { background-color: var(--hub-purple); color: white; }
-        .button-purple:hover { background-color: #6b46c1; }
-
-        /* --- Grid & Card Styling --- */
         .section-box {
-            background: rgba(30, 41, 59, 0.4);
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 1.25rem;
+            border-radius: 30px;
             padding: 2.5rem;
             margin-bottom: 3rem;
         }
 
-        .link-item {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            padding: 1rem;
-            border-radius: 0.75rem;
-            transition: background 0.2s;
+        .button-primary {
+            display: inline-block;
+            background: rgba(255,255,255,0.05);
+            color: #fff;
+            font-weight: 700;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            border: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
         }
-        .link-item:hover { background: rgba(255, 255, 255, 0.03); }
+        .button-primary:hover {
+            transform: translateY(-3px);
+            background: var(--accent-blue);
+            color: #000;
+            box-shadow: 0 10px 20px rgba(99, 179, 237, 0.3);
+        }
+        .button-purple { background: rgba(168, 85, 247, 0.1); border-color: var(--accent-purple); color: var(--accent-purple); }
+        .button-purple:hover { background: var(--accent-purple); color: white; }
 
         .game-card {
-            background-color: #1e293b;
-            border-radius: 1rem;
-            padding: 1.25rem;
-            border: 1px solid #334155;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: all 0.4s ease;
+            text-decoration: none;
         }
         .game-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--hub-blue);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+            background: rgba(168, 85, 247, 0.08);
+            border-color: var(--accent-purple);
+            transform: translateY(-5px);
         }
 
-        .status-badge {
-            font-size: 0.7rem;
-            font-weight: 800;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            text-transform: uppercase;
-        }
-        .status-online { background: #10b981; color: white; }
-        .status-alt { background: white; color: black; }
-
-        .footer {
-            background-color: #0f172a;
-            border-top: 1px solid #1e293b;
-            padding: 3rem 0;
-        }
+        .description-text { font-size: 0.75rem; color: #64748b; margin-top: 0.5rem; }
     </style>
 </head>
-<body class="flex flex-col min-h-screen">
+<body>
 
     <div id="canary-modal">
         <div class="modal-card">
-            <h2 class="text-3xl font-bold text-white mb-2">🧪 Canary Mode</h2>
-            <p class="text-slate-400 mb-6">You are on the experimental version of the hub.</p>
-            <button onclick="closeModal()" class="button-primary">Continue <span>&rarr;</span></button>
+            <h2 class="text-3xl font-black text-white mb-2">🧪 CANARY MODE</h2>
+            <p class="text-slate-400 mb-8">Experimental Build V.2025.12</p>
+            <button onclick="closeModal()" class="button-primary w-full button-purple">Continue <span>&rarr;</span></button>
         </div>
     </div>
 
-    <img src="https://next.gitlab.com/images/hero-bg-left.svg" class="bg-decor bg-left"/>
-    <img src="https://next.gitlab.com/images/hero-bg-right.svg" class="bg-decor bg-right"/>
+    <img src="https://next.gitlab.com/images/hero-bg-left.svg" id="bg-l" class="bg-decor bg-left"/>
+    <img src="https://next.gitlab.com/images/hero-bg-right.svg" id="bg-r" class="bg-decor bg-right"/>
 
     <header class="header">
-        <div class="container mx-auto px-6">
-            <h1 class="text-3xl font-extrabold animate-gradient-text">🎮 Unblocked Games Hub</h1>
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <h1 class="text-2xl font-black animate-gradient-text">ahw101 Hub</h1>
         </div>
     </header>
 
-    <main class="flex-grow container mx-auto px-6">
-        <section class="hero-section">
-            <h2 class="text-5xl md:text-6xl font-extrabold text-white mb-6 leading-tight">
-                Your Portal to <span id="dynamic-hero" class="animate-gradient-text">Uninterrupted Fun!</span>
+    <main class="container mx-auto px-6">
+        <section class="py-20 text-center">
+            <h2 class="text-5xl md:text-7xl font-black text-white mb-6 tracking-tighter">
+                Portal to <span id="dynamic-hero" class="animate-gradient-text">Uninterrupted Fun!</span>
             </h2>
-            <p class="text-lg text-slate-400 max-w-2xl mx-auto mb-10">
+            <p class="text-lg text-slate-400 max-w-2xl mx-auto mb-6 animate-reveal">
                 A premium collection of proxies and unblocked experiences. No limits, just gaming bliss.
             </p>
-            <p></p>
-            <p></p>
-            <p class="text-lg text-slate-400 max-w-2xl mx-auto mb-10">
-                Highly updated home page. Updated on the 20ᵗʰ of December, 2025.
-            </p>
-            <div class="bg-blue-900 bg-opacity-20 border border-blue-500 rounded-lg p-4 max-w-3xl mx-auto mb-10 text-sm">
-                <strong>Other Links:</strong> 
-                <a href="https://teacherrbad.vercel.app/" class="underline ml-2">teacherrbad.vercel.app</a> • 
-                <a href="https://ahw101.github.io/unblocked-games-for-life" class="underline ml-2">ahw101.github.io/unblocked-games-for-life</a> • 
-                <a href="https://edward-the-goat.netlify.app/" class="underline ml-2">edward-the-goat.netlify.app</a>
+            <p class="text-xs font-mono text-gray-600 uppercase tracking-widest animate-reveal mb-10">Updated: December 21, 2025</p>
+        </section>
+
+        <section id="games-list" class="pb-20 animate-reveal">
+            <h3 class="text-xs font-black text-blue-400 uppercase tracking-widest mb-8 text-center">Top picks</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <a href="https://tinyurl.com/gdshsdgdshfdhg" target="_blank" class="game-card">
+                    <span class="font-bold text-white">MonkeyGG2 ahw101</span>
+                    <span class="text-xs text-red-400 font-bold">Broken</span>
+                </a>
+                <a href='/home' class="game-card">
+                    <span class="font-bold text-white">More Fun Hub</span>
+                    <span class="text-xs text-green-400 font-bold">Online ✅</span>
+                </a>
+                <a href="Lunaar.docx" class="game-card" style="border-color: #f59e0b;">
+                    <span class="font-bold text-yellow-500">Lunaar.org</span>
+                    <span class="text-xs text-yellow-500 font-bold">Best 🔥</span>
+                </a>
+                <a href="now.gg.txt" class="game-card">
+                    <span class="font-bold text-white">now.gg Links</span>
+                </a>
             </div>
         </section>
 
-        <div class="section-box">
-            <h3 class="text-2xl font-bold text-white mb-8 border-b border-gray-700 pb-2">🚀 Explore the Hub</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="section-box animate-reveal">
+            <h3 class="text-xs font-black text-purple-400 uppercase tracking-widest mb-10">Navigation Matrix</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                 <div>
-                    <h4 class="text-lg font-semibold text-blue-300 mb-4">Quick Links</h4>
-                    <div class="space-y-4">
-                        <div class="link-item">
+                    <h4 class="text-xl font-bold text-white mb-6">Quick Links</h4>
+                    <div class="space-y-6">
+                        <div>
                             <a href="#games-list" class="button-primary w-full md:w-max">Games</a>
-                            <p class="text-xs text-slate-500">Jump straight to our top game picks.</p>
+                            <p class="description-text">Jump straight to our top game picks.</p>
                         </div>
-                        <div class="link-item">
+                        <div>
                             <a href="#about" class="button-primary w-full md:w-max">Developer Credits</a>
-                            <p class="text-xs text-slate-500">Find out who built this hub.</p>
+                            <p class="description-text">Find out who built this hub.</p>
                         </div>
-                        <div class="link-item">
-                            <a href="https://github.com/ahw101/unblocked-games-for-life/" class="button-primary w-full md:w-max">Check out the source code on GitHub!</a>
-                            <p class="text-xs text-slate-500">Will link you to GitHub! Sorry my GitHub is so clogged, will try and sort that out...</p>
+                        <div>
+                            <a href="https://github.com/ahw101/unblocked-games-for-life/" class="button-primary w-full md:w-max">GitHub Source</a>
+                            <p class="description-text">Will link you to GitHub! Sorry my GitHub is so clogged, will try and sort that out...</p>
                         </div>
                     </div>
                 </div>
                 <div>
-                    <h4 class="text-lg font-semibold text-purple-300 mb-4">Other cool stuff</h4>
+                    <h4 class="text-xl font-bold text-purple-400 mb-6">Other Cool Stuff</h4>
                     <div class="space-y-6">
-                        <div class="link-item">
+                        <div>
                             <a href="https://gamesbyedward.vercel.app/" class="button-primary button-purple w-full md:w-max">Core Arcade (New!)</a>
-                            <p class="text-xs text-slate-500">This new one can only be used for HTML games. In beta! Expect Bugs!</p>
+                            <p class="description-text">This new one can only be used for HTML games. In beta! Expect Bugs!</p>
                         </div>
-                        <div class="link-item">
-                            <a href="nettleweb.html" class="button-primary w-full md:w-max">Nettleweb</a>
-                            <p class="text-xs text-slate-500">A massive collection of unblocked links and resources.</p>
+                        <div>
+                            <a href="/nettleweb" class="button-primary w-full md:w-max">Nettleweb</a>
+                            <p class="description-text">A massive collection of unblocked links and resources.</p>
                         </div>
-                        <div class="link-item">
+                        <div>
                             <a href="https://ambient-ahw101.vercel.app/" class="button-primary w-full md:w-max">Ambient Proxy</a>
-                            <p class="text-xs text-slate-500">Unblock YouTube, Social Media, AI, and more.</p>
+                            <p class="description-text">Unblock YouTube, Social Media, AI, and more.</p>
                         </div>
-                        <div class="link-item">
+                        <div>
                             <a href="https://chromebook-utilities.pages.dev/" class="button-primary w-full md:w-max">Chromebook Proxies</a>
-                            <p class="text-xs text-slate-500">Unlock advanced utilities on your chromebook. Including lots of links for now.gg! Not made by me.</p>
+                            <p class="description-text">Unlock advanced utilities on your chromebook. Including lots of links for now.gg! Not made by me.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <section id="games-list" class="pb-20">
-            <h3 class="text-3xl font-bold text-center text-white mb-10">Our Top Picks</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="game-card">
-                    <a href="https://tinyurl.com/gdshsdgdshfdhg" target="_blank" class="font-bold text-blue-400">Edward's Games</a>
-                    <span class="status-badge status-online">Online ✅</span>
-                </div>
-                <div class="game-card">
-                    <a href="home.html" class="font-bold text-blue-400">More Fun & Games</a>
-                    <span class="status-badge status-online">Online ✅</span>
-                </div>
-                <div class="game-card">
-                    <a href="Lunaar.docx" class="font-bold text-blue-400">Lunaar.org</a>
-                    <span class="status-badge status-online">Best 🔥</span>
-                </div>
-                <div class="game-card">
-                    <a href="now.gg.txt" class="font-bold text-blue-400">now.gg Links</a>
-                    <span class="status-badge status-online">Active</span>
-                </div>
-            </div>
-        </section>
-
-        <section id="about" class="pb-20 text-center">
+        <section id="about" class="pb-32 text-center animate-reveal">
             <div class="section-box max-w-2xl mx-auto">
-                <h3 class="text-2xl font-bold text-white mb-4">Who made this?</h3>
-                <p class="text-slate-300">This website was coded by <strong>Edward</strong>.</p>
+                <h3 class="text-xl font-bold text-white mb-4">Who made this?</h3>
+                <p class="text-slate-300">This website was coded by <strong>ahw101</strong>.</p>
             </div>
         </section>
     </main>
 
-    <footer class="footer text-center">
-        <div class="container mx-auto px-6">
-            <h2 class="text-lg font-bold text-white mb-2">Enjoy Responsibly!</h2>
-            <p class="text-xs text-slate-500 max-w-xl mx-auto">We provide accessible gaming tools. Please use them thoughtfully and respect your local guidelines. Have a fantastic time!</p>
-            <p class="mt-8 text-xs opacity-30">&copy; 2025 Unblocked Games Hub.</p>
-        </div>
+    <footer class="py-10 text-center border-t border-white border-opacity-5">
+        <p class="text-xs text-gray-600 uppercase tracking-widest">© 2025-2026 // ahw101 // Uninterrupted Access</p>
     </footer>
 
     <script>
-        // Secret Shift Shortcut
+        // Reveal on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('reveal-visible');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.animate-reveal').forEach(el => observer.observe(el));
+
+        // Parallax Background
+        document.addEventListener('mousemove', (e) => {
+            const x = (window.innerWidth - e.pageX * 2) / 100;
+            const y = (window.innerHeight - e.pageY * 2) / 100;
+            document.getElementById('bg-l').style.transform = `translateX(${x}px) translateY(${y}px)`;
+            document.getElementById('bg-r').style.transform = `translateX(${-x}px) translateY(${-y}px)`;
+        });
+
+        function closeModal() { document.getElementById('canary-modal').style.display = 'none'; }
+
+        // Secret Switcher
         let lastShift = 0;
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Shift') {
                 const now = Date.now();
-                if (now - lastShift < 400) {
-                    window.location.href = 'switcher.html';
-                }
+                if (now - lastShift < 400) window.location.href = 'switcher.html';
                 lastShift = now;
             }
         });
-
-        // Cookie & Modal logic
-        function getCookie(name) {
-            const value = `; ${document.cookie}`;
-            const parts = value.split(`; ${name}=`);
-            if (parts.length === 2) return parts.pop().split(';').shift();
-        }
-
-        function closeModal() {
-            document.getElementById('canary-modal').style.display = 'none';
-        }
-
-        window.onload = () => {
-            if (getCookie("gitlab_canary") === "true") {
-                document.getElementById('canary-modal').style.display = 'flex';
-                document.getElementById('dynamic-hero').innerText = "Canary Hub Active! 🧪";
-                document.body.style.borderTop = "5px solid var(--canary-orange)";
-            }
-        };
     </script>
 </body>
 </html>
