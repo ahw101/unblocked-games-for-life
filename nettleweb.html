@@ -4,212 +4,52 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nettleweb Mirrors // ahw101</title>
-    <link rel="icon" type="image/png" href="favicon.png">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --accent-primary: #a855f7;
-            --accent-secondary: #6366f1;
-            --bg-dark: #050505;
-            --card-bg: rgba(20, 20, 25, 0.7);
-        }
-
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg-dark);
-            color: #ffffff;
-            margin: 0;
-            overflow-x: hidden;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* --- Animated Mesh Background --- */
-        .mesh-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            background: 
-                radial-gradient(circle at 10% 10%, rgba(168, 85, 247, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 90% 90%, rgba(99, 102, 241, 0.15) 0%, transparent 40%);
-            filter: blur(80px);
-        }
-
-        .mouse-orb {
-            position: fixed;
-            width: 350px;
-            height: 350px;
-            border-radius: 50%;
-            background: var(--accent-primary);
-            filter: blur(100px);
-            opacity: 0.12;
-            z-index: -1;
-            pointer-events: none;
-            transition: transform 0.15s ease-out;
-        }
-
-        /* --- Glass Header --- */
-        .header {
-            background: rgba(10, 10, 10, 0.5);
-            backdrop-filter: blur(20px) saturate(180%);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .modern-gradient {
-            background: linear-gradient(135deg, #fff 40%, var(--accent-primary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* --- Mirror Card: Glassmorphism --- */
-        .mirror-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 1.25rem 1.5rem;
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .mirror-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            border-color: rgba(168, 85, 247, 0.4);
-            background: rgba(30, 30, 40, 0.8);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
-        }
-
-        .mirror-title {
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: #e2e8f0;
-            transition: color 0.3s;
-        }
-
-        .mirror-card:hover .mirror-title {
-            color: var(--accent-primary);
-        }
-
-        /* --- Status Pill --- */
-        .status-pill {
-            font-size: 0.65rem;
-            font-weight: 800;
-            letter-spacing: 0.05em;
-            padding: 4px 12px;
-            border-radius: 100px;
-            background: rgba(16, 185, 129, 0.1);
-            color: #10b981;
-            border: 1px solid rgba(16, 185, 129, 0.2);
-            text-transform: uppercase;
-            white-space: nowrap;
-        }
-
-        /* --- Footer --- */
-        .footer {
-            margin-top: auto;
-            padding: 3rem 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            background: rgba(5, 5, 5, 0.8);
-        }
-
-        /* --- Animation for Entrance --- */
-        .fade-up {
-            animation: fadeUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-            opacity: 0;
-        }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        :root { --accent: #a855f7; --bg: #050505; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: #fff; margin: 0; min-height: 100vh; display: flex; flex-direction: column; }
+        .bg-decor { position: fixed; top: 0; height: 100vh; z-index: -1; opacity: 0.25; pointer-events: none; }
+        .bg-left { left: 0; } .bg-right { right: 0; }
+        .glass-card { background: rgba(20, 20, 25, 0.75); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; transition: 0.4s; padding: 1.5rem; display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: inherit; }
+        .glass-card:hover { transform: translateY(-5px); border-color: var(--accent); background: rgba(30, 30, 40, 0.8); }
+        .status-pill { font-size: 0.7rem; font-weight: 800; padding: 4px 12px; border-radius: 100px; background: rgba(16, 185, 129, 0.1); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.2); text-transform: uppercase; }
     </style>
 </head>
-<body>
+<body class="items-center">
+    <img src="https://next.gitlab.com/images/hero-bg-left.svg" class="bg-decor bg-left" />
+    <img src="https://next.gitlab.com/images/hero-bg-right.svg" class="bg-decor bg-right" />
 
-    <div class="mesh-bg"></div>
-    <div class="mouse-orb" id="orb"></div>
-
-    <header class="header py-6">
-        <div class="container mx-auto px-6 text-center">
-            <h1 class="text-3xl font-extrabold tracking-tighter modern-gradient">🌐 NETTLEWEB MIRRORS</h1>
-        </div>
+    <header class="py-12 text-center">
+        <h1 class="text-4xl font-extrabold tracking-tight">🌐 NETTLEWEB MIRRORS</h1>
+        <p class="text-gray-400 mt-2">Verified access points by ahw101</p>
     </header>
 
-    <main class="container mx-auto px-6 py-16 flex-grow flex flex-col items-center">
-        <div class="text-center mb-12 fade-up">
-            <p class="text-lg text-gray-400 max-w-2xl mx-auto">
-                Access Nettleweb via our high-speed mirrors. Optimized for <strong>uninterrupted browsing.</strong> 
-                Encrypted and verified by <span class="text-white font-bold">ahw101</span>.
-            </p>
-        </div>
-
-        <div class="w-full max-w-2xl space-y-4 fade-up" style="animation-delay: 0.1s;">
-            <a href="https://ahw101.github.io" target="_blank" class="mirror-card group">
-                <span class="mirror-title">ahw101.github.io</span>
-                <span class="status-pill">Primary ✅</span>
-            </a>
-
-            <a href="https://edward-the-best.vercel.app/" target="_blank" class="mirror-card group">
-                <span class="mirror-title">edward-the-best.vercel.app</span>
-                <span class="status-pill">Stable</span>
-            </a>
-
-            <a href="https://free-nettle.vercel.app/" target="_blank" class="mirror-card group">
-                <span class="mirror-title">free-nettle.vercel.app</span>
-                <span class="status-pill">Active</span>
-            </a>
-
-            <a href="https://free-nettle.netlify.app/" target="_blank" class="mirror-card group">
-                <span class="mirror-title">free-nettle.netlify.app</span>
-                <span class="status-pill">Active</span>
-            </a>
-
-            <a href="https://giigle.cf" target="_blank" class="mirror-card group">
-                <span class="mirror-title">giigle.cf</span>
-                <span class="status-pill" style="color: #60a5fa; border-color: rgba(96,165,250,0.3); background: rgba(96,165,250,0.1);">Legacy</span>
-            </a>
-        </div>
+    <main class="w-full max-w-2xl px-6 space-y-4 pb-20">
+        <a href="https://ahw101.github.io" target="_blank" class="glass-card">
+            <span class="font-bold text-lg">ahw101.github.io (Recommended)</span>
+            <span class="status-pill">Online ✅</span>
+        </a>
+        <a href="https://edward-the-best.vercel.app/" target="_blank" class="glass-card">
+            <span class="font-bold text-lg">edward-the-best.vercel.app</span>
+            <span class="status-pill">Online ✅</span>
+        </a>
+        <a href="https://free-nettle.vercel.app/" target="_blank" class="glass-card">
+            <span class="font-bold text-lg">free-nettle.vercel.app</span>
+            <span class="status-pill">Online ✅</span>
+        </a>
+        <a href="https://free-nettle.netlify.app/" target="_blank" class="glass-card">
+            <span class="font-bold text-lg">free-nettle.netlify.app</span>
+            <span class="status-pill">Online ✅</span>
+        </a>
+        <a href="https://giigle.cf" target="_blank" class="glass-card">
+            <span class="font-bold text-lg">giigle.cf</span>
+            <span class="status-pill">Online ✅</span>
+        </a>
     </main>
 
-    <footer class="footer text-center">
-        <div class="container mx-auto px-6">
-            <p class="text-sm text-gray-500 font-bold uppercase tracking-widest mb-2">Seamless Access Guaranteed</p>
-            <p class="text-xs text-gray-600 font-mono">LATEST_REV: 28-JUN-2025 // AUTH: AHW101</p>
-        </div>
+    <footer class="mt-auto py-8 text-center text-gray-600 text-xs uppercase tracking-widest">
+        Last Updated: June 28, 2025 // ahw101
     </footer>
-
-    <script>
-        // Interactive Mouse Glow
-        const orb = document.getElementById('orb');
-        document.addEventListener('mousemove', (e) => {
-            const x = e.clientX - 175;
-            const y = e.clientY - 175;
-            orb.style.transform = `translate(${x}px, ${y}px)`;
-        });
-
-        // Secret Switcher Shortcut (Tap Shift twice)
-        let lastShift = 0;
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Shift') {
-                const now = Date.now();
-                if (now - lastShift < 400) {
-                    window.location.href = 'switcher.html';
-                }
-                lastShift = now;
-            }
-        });
-    </script>
 </body>
 </html>
