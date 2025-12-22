@@ -11,38 +11,67 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: #fff; margin: 0; min-height: 100vh; display: flex; flex-direction: column; }
         .bg-decor { position: fixed; top: 0; height: 100vh; z-index: -1; opacity: 0.25; pointer-events: none; }
         .bg-left { left: 0; } .bg-right { right: 0; }
+        
+        /* New Back Button Style */
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: 0.3s;
+            z-index: 10;
+            text-decoration: none;
+            color: #ccc;
+        }
+        .back-btn:hover {
+            background: rgba(168, 85, 247, 0.2);
+            border-color: var(--accent);
+            color: #fff;
+            transform: translateX(-3px);
+        }
+
         .glass-card { background: rgba(20, 20, 25, 0.75); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; transition: 0.4s; padding: 1.5rem; display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: inherit; }
         .glass-card:hover { transform: translateY(-5px); border-color: var(--accent); background: rgba(30, 30, 40, 0.8); }
         .status-pill { font-size: 0.7rem; font-weight: 800; padding: 4px 12px; border-radius: 100px; background: rgba(16, 185, 129, 0.1); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.2); text-transform: uppercase; }
     </style>
 </head>
 <body class="items-center">
+    <a href="skibidi.html" target="_self" class="back-btn">
+        ← Back
+    </a>
+
     <img src="https://next.gitlab.com/images/hero-bg-left.svg" class="bg-decor bg-left" />
     <img src="https://next.gitlab.com/images/hero-bg-right.svg" class="bg-decor bg-right" />
-
+    
     <header class="py-12 text-center">
         <h1 class="text-4xl font-extrabold tracking-tight">🌐 NETTLEWEB MIRRORS</h1>
         <p class="text-gray-400 mt-2">Verified access points by ahw101</p>
     </header>
 
     <main class="w-full max-w-2xl px-6 space-y-4 pb-20">
-        <a href="https://ahw101.github.io" target="_blank" class="glass-card">
+        <a href="https://ahw101.github.io" target="_self" class="glass-card">
             <span class="font-bold text-lg">ahw101.github.io (Recommended)</span>
             <span class="status-pill">Online ✅</span>
         </a>
-        <a href="https://edward-the-best.vercel.app/" target="_blank" class="glass-card">
+        <a href="https://edward-the-best.vercel.app/" target="_self" class="glass-card">
             <span class="font-bold text-lg">edward-the-best.vercel.app</span>
             <span class="status-pill">Online ✅</span>
         </a>
-        <a href="https://free-nettle.vercel.app/" target="_blank" class="glass-card">
+        <a href="https://free-nettle.vercel.app/" target="_self" class="glass-card">
             <span class="font-bold text-lg">free-nettle.vercel.app</span>
             <span class="status-pill">Online ✅</span>
         </a>
-        <a href="https://free-nettle.netlify.app/" target="_blank" class="glass-card">
+        <a href="https://free-nettle.netlify.app/" target="_self" class="glass-card">
             <span class="font-bold text-lg">free-nettle.netlify.app</span>
             <span class="status-pill">Online ✅</span>
         </a>
-        <a href="https://giigle.cf" target="_blank" class="glass-card">
+        <a href="https://giigle.cf" target="_self" class="glass-card">
             <span class="font-bold text-lg">giigle.cf</span>
             <span class="status-pill">Online ✅</span>
         </a>
