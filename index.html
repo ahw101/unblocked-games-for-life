@@ -3,334 +3,131 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Unblocked Games Hub - Play Freely!</title>
+    <title>Unblocked Games Hub</title>
     <meta name="theme-color" content="#000000"> 
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <meta name="google-site-verification" content="aF7y4_4qwClFRp8KWhxRZdQ_4ZhJyVB7RGWeYywKtoY" />
-    <meta name="description" content="Link hub to other websites. Made by ahw101">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="08c66f86-eeed-4cda-9d98-d9ecb5756bf1"></script>
     <style>
-        /* --- Background Change: body background set to black --- */
+        :root {
+            --bg-image: url('https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&w=2070&auto=format&fit=crop');
+            --glass-bg: rgba(255, 255, 255, 0.2);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --text-color: #1d1d1f;
+            --btn-bg: rgba(255, 255, 255, 0.3);
+            --btn-hover: rgba(255, 255, 255, 0.5);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop');
+                --glass-bg: rgba(0, 0, 0, 0.4);
+                --glass-border: rgba(255, 255, 255, 0.1);
+                --text-color: #ffffff;
+                --btn-bg: rgba(255, 255, 255, 0.1);
+                --btn-hover: rgba(255, 255, 255, 0.15);
+            }
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #000000; /* Solid Black */
-            color: #e2e8f0;
-            line-height: 1.6;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-        /* --- Modal Styles Start (for welcome modal only) --- */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.95);
+            background: var(--bg-image) no-repeat center center fixed;
+            background-size: cover;
+            color: var(--text-color);
+            transition: background 0.5s ease;
+            height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
-            z-index: 1000;
-            opacity: 1; 
-            transition: opacity 0.5s ease;
+            justify-content: center;
+            margin: 0;
+            overflow: hidden;
         }
-        .modal-hide {
-            opacity: 0;
-        }
-        .modal-content {
-            background-color: #1e293b; 
-            padding: 2.5rem;
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
-            max-width: 450px;
+
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px) saturate(160%);
+            -webkit-backdrop-filter: blur(25px) saturate(160%);
+            border: 1px solid var(--glass-border);
+            border-radius: 2.5rem;
+            padding: 3rem;
+            width: 90%;
+            max-width: 480px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
             text-align: center;
+            transition: all 0.5s ease;
         }
-        .modal-button {
+
+        .glass-button {
             display: block;
             width: 100%;
-            margin-top: 1rem;
-            font-weight: 700;
-            padding: 0.75rem 2rem;
-            border-radius: 0.5rem;
-            transition: background-color 0.1s ease, transform 0.1s ease; 
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
-        }
-        .button-primary-modal {
-            background-color: #63b3ed;
-            color: #0f172a;
-        }
-        .button-secondary-modal {
-            background-color: #f6ad55;
-            color: #0f172a;
-        }
-        /* New tertiary button color for Roblox */
-        .button-tertiary-modal {
-            background-color: #e3342f; /* Roblox red-like color */
-            color: #ffffff;
-        }
-        .button-primary-modal:hover {
-            background-color: #3b82f6;
-            transform: translateY(-2px);
-        }
-        .button-secondary-modal:hover {
-            background-color: #ed8936;
-            transform: translateY(-2px);
-        }
-        .button-tertiary-modal:hover {
-            background-color: #cc1f1a;
-            transform: translateY(-2px);
-        }
-        /* Add active state for button click animation */
-        .button-primary-modal:active, .button-secondary-modal:active, .button-tertiary-modal:active {
-            transform: scale(0.98);
-        }
-        /* Existing button styles applied to the link for consistent look */
-        .button-primary {
-            display: inline-block;
-            background-color: #63b3ed;
-            color: #0f172a;
-            font-weight: 700;
-            padding: 0.75rem 2rem;
-            border-radius: 0.5rem;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
-        }
-        .button-primary:hover {
-            background-color: #3b82f6;
-            transform: translateY(-2px);
-        }
-        /* --- Rest of the Existing Styles --- */
-        .header {
-            background-color: #1e293b;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            padding: 1.5rem 0;
-            border-bottom: 1px solid #334155;
-        }
-        .hero-section {
-            padding: 6rem 0;
-            background: linear-gradient(to bottom right, #1f2937, #000000);
-            text-align: center;
-        }
-        .game-card {
-            background-color: #27374a;
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            border: 1px solid #334155;
-        }
-        .game-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
-            background-color: #334155;
-        }
-        .game-title {
-            font-weight: 700;
-            color: #60a5fa;
-            font-size: 1.5rem;
-        }
-        .game-status {
-            font-size: 0.8rem;
+            padding: 1.1rem;
+            margin: 1rem 0;
+            background: var(--btn-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 1.2rem;
+            color: var(--text-color);
             font-weight: 600;
-            padding: 0.35rem 1rem;
-            border-radius: 9999px;
-            margin-left: 1rem;
-            flex-shrink: 0;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
         }
-        .status-working {
-            background-color: #22c55e;
-            color: #fff;
+
+        .glass-button:hover {
+            background: var(--btn-hover);
+            transform: translateY(-4px) scale(1.02);
+            border-color: rgba(255, 255, 255, 0.5);
         }
-        .status-unknown {
-            background-color: #facc15;
-            color: #1a202c;
+
+        .glass-button:active {
+            transform: scale(0.97);
         }
-        .status-WHITE {
-            background-color: #FFFFFF;
-            color: #000000;
+
+        h1 {
+            letter-spacing: -0.05em;
+            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
         }
-        .animate-gradient-text {
-            background: linear-gradient(90deg, #63b3ed, #805ad5, #dd6b20);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: gradient-flow 4s ease infinite;
-        }
-        @keyframes gradient-flow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        .footer {
-            background-color: #1e293b;
-            border-top: 1px solid #334155;
-            padding: 2rem 0;
-        }
-        .footer p, .footer h2 {
-            color: #94a3b8;
+
+        .subtitle {
+            font-size: 0.95rem;
+            opacity: 0.7;
+            margin-bottom: 2.5rem;
         }
     </style>
-<script defer src="https://cloud.umami.is/script.js" data-website-id="08c66f86-eeed-4cda-9d98-d9ecb5756bf1"></script>
 </head>
-<body class="bg-black text-white flex flex-col min-h-screen">
-    
-    <div id="welcome-modal" class="modal-overlay hidden"> 
-        <div class="modal-content">
-            <h3 class="text-3xl font-bold text-white mb-4">Why are you here?</h3>
-            <p class="text-slate-300 mb-6">Choose an option to continue:</p>
-            
-            <button id="play-games-btn" class="modal-button button-secondary-modal">
-                Download Games (GitLab) (.tar file)
-            </button> 
+<body>
 
-            <button id="access-edwards-btn" class="modal-button button-primary-modal">
-                Access Edward's website (yep!)
-            </button>
-            
-            <button id="play-roblox-modal-btn" class="modal-button button-tertiary-modal">
-                Play Games (Lunaar Lite)
-            </button>
-        </div>
+    <div class="glass-panel">
+        <h1>Welcome</h1>
+        <p class="subtitle">Select an option below</p>
+        
+        <a href="skibidi.html" class="glass-button">
+            Access the website
+        </a>
+
+        <a href="https://gamesbyedward.vercel.app" class="glass-button">
+            Play HTML games
+        </a>
+
+        <a href="download.html" class="glass-button">
+            Lunaar.org Proxies
+        </a>
     </div>
-
-    <header class="header">
-        <div class="container flex justify-between items-center">
-            <h1 class="text-4xl font-extrabold animate-gradient-text">
-                🎮 Unblocked Games Hub
-            </h1>
-        </div>
-    </header>
-    <main class="flex-grow">
-        <section class="hero-section">
-            <div class="container">
-                <h2 class="text-5xl md:text-6xl font-extrabold text-white mb-6 leading-tight">
-                    Your Portal to <span class="animate-gradient-text">Uninterrupted Fun!</span>
-                </h2>
-                <p class="text-xl text-slate-300 max-w-3xl mx-auto mb-8">
-                    Guys, also use <a href="https://teacherrbad.vercel.app/" class="underline">teacherrbad.vercel.app</a>, <a href="https://ahw101.github.io/unblocked-games-for-life" class="underline">ahw101.github.io/unblocked-games-for-life</a> and <a href="https://edward-the-goat.netlify.app/" class="underline">edward-the-goat.netlify.app/</a>for proxies!
-                </p>
-                <p class="text-xl text-slate-300 max-w-3xl mx-auto mb-8">
-                    Discover a curated collection of **unblocked games**, ready for you to enjoy anytime, anywhere. No restrictions, just pure gaming bliss!
-                </p>
-                <h3 class="text-2xl font-bold text-white mb-4">Check out:</h3>
-                
-                <a href="https://www.easyfun.gg/cloud-games/roblox.html" target="_blank" class="button-primary mb-2">Play Roblox</a>
-                <p class="text-slate-300 mb-4">The ultimate unblocked experience!</p>
-                
-                <a href="#games-list" class="button-primary mb-2">Games</a>
-                <p class="text-slate-300 mb-4">Simply games!</p>
-                <a href="#about" class="button-primary mb-2">Who made this?</a>
-                <p class="text-slate-300 mb-4">Click to see.</p>
-                <h3 class="text-2xl font-bold text-white mb-4">Other cool stuff:</h3>
-                <a href="nettleweb.html" class="button-primary mb-2">Nettleweb (s)</a>
-                <p class="text-slate-300 mb-4">A load of links!</p>
-                <a href="youtube.txt" class="button-primary mb-2">YouTube Links</a>
-                <p class="text-slate-300 mb-4">Use nettleweb for that as well!</p>
-                <a href="https://chromebook-utilities.pages.dev/" class="button-primary mb-2">Lots More proxies!</a>
-                <p class="text-slate-300 mb-4">Enjoy unblocked Roblox, and a load of other things!</p>
-                <a href="https://ambient-ahw101.vercel.app/" class="button-primary mb-2">Ambient (By me)</a>
-                <p class="text-slate-300 mb-4">This allows you to get unblocked sites, like social media and YouTube!</p>
-            </div>
-        </section>
-
-        <section id="games-list" class="game-list-section">
-            <div class="container">
-                <h3 class="text-3xl font-bold text-center text-white mb-10">Our Top Picks</h3>
-                <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <li class="game-card flex flex-col sm:flex-row items-start sm:items-center justify-between">
-                        <a href="https://ahw101.github.io/edwardsgame.github.io/" target="_blank" rel="noopener noreferrer" class="text-xl game-title hover:underline flex-grow mb-2 sm:mb-0">My Awesome Games Site</a>
-                        <span class="game-status status-working">Online ✅</span>
-                    </li>
-                    <li class="game-card flex flex-col sm:flex-row items-start sm:items-center justify-between">
-                        <a href="home.html" target="_blank" rel="noopener noreferrer" class="text-xl game-title hover:underline flex-grow mb-2 sm:mb-0">More Games & Fun</a>
-                        <span class="game-status status-working">Online ✅</span>
-                    </li>
-                    <li class="game-card flex flex-col sm:flex-row items-start sm:items-center justify-between">
-                        <a href="nettleweb.html" target="_blank" rel="noopener noreferrer" class="text-xl game-title hover:underline flex-grow mb-2 sm:mb-0">NettleWeb (Best of collection)</a>
-                        <span class="game-status status-working">Online ✅</span>
-                    </li>
-                    <li class="game-card flex flex-col sm:flex-row items-start sm:items-center justify-between">
-                        <a href="https://free-money-exploit.github.io/" target="_blank" rel="noopener noreferrer" class="text-xl game-title hover:underline flex-grow mb-2 sm:mb-0">ChickenOS</a>
-                        <span class="game-status status-working">Online ✅</span>
-                    </li>
-                    <li class="game-card flex flex-col sm:flex-row items-start sm:items-center justify-between">
-                        <a href="https://lunaar.org" target="_blank" rel="noopener noreferrer" class="text-xl game-title hover:underline flex-grow mb-2 sm:mb-0">Lunaar.org (Best!)</a>
-                        <span class="game-status status-working">Online ✅</span>
-                    </li>
-                    <li class="game-card flex flex-col sm:flex-row items-start sm:items-center justify-between">
-                        <a href="https://ahw101.github.io/unblocked-games-for-life/download-ubg-offline.zip" target="_blank" rel="noopener noreferrer" class="text-xl game-title hover:underline flex-grow mb-2 sm:mb-0">download</a>
-                        <span class="game-status status-WHITE">Alternate</span>
-                    </li>
-                </ul>
-            </div>
-        </section>
-        <section id="about" class="game-list-section">
-            <div class="container">
-                <h3 class="text-3xl font-bold text-center text-white mb-10">Who made this?</h3>
-                <p class="text-xl text-slate-300 max-w-3xl mx-auto mb-8">This website was made by edward. </p>
-            </div>
-        </section>
-    </main>
-    <footer class="footer text-center">
-        <div class="container">
-            <h2 class="text-lg font-bold mb-2">Enjoy Responsibly!</h2>
-            <p>While we strive to provide accessible gaming, please remember to use these resources thoughtfully. We are not responsible for how you choose to engage with the content. Play fair, respect guidelines, and most importantly, have a fantastic time!</p>
-            <p class="mt-4 text-sm">&copy; 2025 Unblocked Games Hub. All rights reserved.</p>
-        </div>
-    </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const welcomeModal = document.getElementById('welcome-modal');
-            
-            // Welcome Modal Buttons
-            const accessBtn = document.getElementById('access-edwards-btn');     // "Access Edward's website (yep!)"
-            const playGamesBtn = document.getElementById('play-games-btn');       // "Play games :)"
-            const playRobloxBtn = document.getElementById('play-roblox-modal-btn'); // "Play Roblox"
-
-            const transitionDuration = 500;
-            
-            const urlParams = new URLSearchParams(window.location.search);
-            const modalPassed = urlParams.get('modal-passed');
-
-            if (!modalPassed) {
-                welcomeModal.classList.remove('hidden'); 
-            } else {
-                welcomeModal.classList.add('hidden');
-            }
-
-            // Function to handle the successful button click and redirection/closure
-            function handleRedirection(modalElement, targetUrl) {
-                modalElement.classList.add('modal-hide');
-                setTimeout(() => {
-                    window.location.href = targetUrl;
-                }, transitionDuration); 
-            }
-
-            // --- WELCOME MODAL EVENT LISTENERS (3 Options) ---
-
-            // 1. "Play games :)" goes to Lunaar Link (as requested)
-            playGamesBtn.addEventListener('click', () => {
-                handleRedirection(welcomeModal, 'https://gitlab.com/3kh0/3kh0-assets/-/archive/main/3kh0-assets-main.tar?ref_type=heads');
-            });
-            
-            // 2. "Access Edward's website (yep!)" goes to Edward's Site (skibidi.html) (as requested)
-            accessBtn.addEventListener('click', () => {
-                handleRedirection(welcomeModal, window.location.pathname + 'skibidi.html');
-            });
-            
-            // 3. "Play Roblox" goes to the EasyFun Roblox link
-            playRobloxBtn.addEventListener('click', () => {
-                handleRedirection(welcomeModal, 'https://lunaar-lite.vercel.app/');
+            const buttons = document.querySelectorAll('.glass-button');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if(href !== '#' && !href.startsWith('http')) {
+                        e.preventDefault();
+                        document.body.style.opacity = '0';
+                        document.body.style.transition = 'opacity 0.4s ease';
+                        setTimeout(() => {
+                            window.location.href = href;
+                        }, 400);
+                    }
+                });
             });
         });
     </script>
