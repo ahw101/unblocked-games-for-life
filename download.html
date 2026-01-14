@@ -1,132 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ahw101 // HyperHub</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
-    <style>
-        :root { 
-            --accent: #f59e0b; /* Golden Yellow for Lunaar */
-            --bg: #000000; 
-            --glow: rgba(245, 158, 11, 0.3);
-        }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: #fff; margin: 0; overflow: hidden; height: 100vh; display: flex; align-items: center; justify-content: center; }
+  <meta charset="UTF-8">
+  <title>Redirecting…</title>
 
-        /* --- Background SVGs --- */
-        .bg-decor { position: fixed; top: 0; height: 100vh; z-index: -1; opacity: 0.3; transition: transform 0.6s ease-out; }
-        .bg-left { left: 0; } .bg-right { right: 0; }
+  <!-- Instant redirect -->
+  <meta http-equiv="refresh" content="0; url=lunnar.html">
 
-        /* --- Download Card --- */
-        .download-card { 
-            background: rgba(255, 255, 255, 0.03); 
-            backdrop-filter: blur(25px); 
-            border: 1px solid rgba(255, 255, 255, 0.08); 
-            border-radius: 32px; 
-            padding: 3rem; 
-            width: 100%;
-            max-width: 500px;
-            text-align: center;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 40px 100px rgba(0,0,0,0.5);
-        }
-        .download-card:hover { 
-            transform: translateY(-10px);
-            border-color: var(--accent);
-            box-shadow: 0 0 40px var(--glow);
-        }
-
-        /* --- File Icon Animation --- */
-        .file-icon {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            display: inline-block;
-            animation: float 3s ease-in-out infinite;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-
-        /* --- Premium Tag (Yellow Style) --- */
-        .tag-yellow { 
-            display: inline-block;
-            background: rgba(245, 158, 11, 0.1); 
-            color: #f59e0b; 
-            border: 1px solid rgba(245, 158, 11, 0.3);
-            font-size: 0.7rem;
-            font-weight: 900;
-            padding: 6px 14px;
-            border-radius: 100px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 1rem;
-        }
-
-        /* --- Download Button --- */
-        .btn-download {
-            background: var(--accent);
-            color: #000;
-            font-weight: 800;
-            padding: 1rem 2.5rem;
-            border-radius: 16px;
-            display: inline-block;
-            transition: all 0.3s;
-            text-decoration: none;
-            box-shadow: 0 10px 20px var(--glow);
-        }
-        .btn-download:hover {
-            transform: scale(1.05);
-            filter: brightness(1.1);
-            box-shadow: 0 15px 30px var(--glow);
-        }
-
-        .btn-back {
-            position: absolute;
-            top: 2rem;
-            left: 2rem;
-            font-size: 0.8rem;
-            font-weight: 800;
-            color: #666;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-        .btn-back:hover { color: #fff; }
-    </style>
-<script defer src="https://cloud.umami.is/script.js" data-website-id="08c66f86-eeed-4cda-9d98-d9ecb5756bf1"></script>
+  <!-- Fallback for browsers with meta refresh disabled -->
+  <script>
+    window.location.replace("lunnar.html");
+  </script>
 </head>
 <body>
-
-    <a href="skibidi.html" class="btn-back">← BACK TO HUB</a>
-
-    <img src="https://next.gitlab.com/images/hero-bg-left.svg" id="bg-l" class="bg-decor bg-left"/>
-    <img src="https://next.gitlab.com/images/hero-bg-right.svg" id="bg-r" class="bg-decor bg-right"/>
-
-    <div class="download-card">
-        <div class="tag-yellow">Verified Source</div>
- 
-        <h1 class="text-3xl font-black mb-2">Lunaar.docx</h1>
-        <p class="text-gray-500 text-sm mb-8">Lunaar Links Download.<br>Size: 15.2 KB</p>
-              <div class="file-icon">🔒</div>
-        <a href="Lunaar.docx" download class="btn-download">
-            Secure Download
-        </a>
-        <br>
-        <div class="file-icon">🔗</div>
-<a href="lunaar.html" class="btn-download">Look at these links online</a>
-
-        <p class="mt-6 text-xs text-gray-600 font-mono">© 2025 // ahw101 SECURE PORTAL</p>
-    </div>
-
-    <script>
-        // Parallax Effect
-        document.addEventListener('mousemove', (e) => {
-            const x = (window.innerWidth - e.pageX * 2) / 100;
-            const y = (window.innerHeight - e.pageY * 2) / 100;
-            document.getElementById('bg-l').style.transform = `translateX(${x}px) translateY(${y}px)`;
-            document.getElementById('bg-r').style.transform = `translateX(${-x}px) translateY(${-y}px)`;
-        });
-    </script>
+  <noscript>
+    <p>Redirecting… <a href="lunnar.html">Click here if not redirected</a></p>
+  </noscript>
 </body>
 </html>
