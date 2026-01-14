@@ -1,225 +1,165 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ahw101 // HyperHub</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
-    <style>
-        :root { 
-            --accent: #f59e0b; 
-            --bg: #000000; 
-            --glow: rgba(245, 158, 11, 0.4);
-        }
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background-color: var(--bg); 
-            color: #fff; 
-            margin: 0; 
-            overflow-x: hidden;
-            perspective: 1000px;
-        }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DuckMath // HyperHub</title>
 
-        /* --- Animated Background SVGs --- */
-        .bg-decor { 
-            position: fixed; 
-            top: 0; 
-            height: 100vh; 
-            z-index: -1; 
-            opacity: 0.35; 
-            transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); 
-        }
-        .bg-left { left: -5%; } .bg-right { right: -5%; }
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 
-        /* --- Header Glow --- */
-        .header { 
-            background: rgba(0,0,0,0.8); 
-            backdrop-filter: blur(20px); 
-            border-bottom: 1px solid rgba(255,255,255,0.1); 
-            position: sticky; 
-            top: 0; 
-            z-index: 100;
-            animation: slideDown 0.8s ease;
-        }
-        
-        @keyframes slideDown { from { transform: translateY(-100%); } to { transform: translateY(0); } }
+<style>
+:root {
+  --accent:#facc15;
+  --bg:#000;
+  --glow:rgba(250,204,21,.4);
+}
+body{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  background:var(--bg);
+  color:#fff;
+  margin:0;
+  overflow-x:hidden;
+  perspective:1000px;
+}
+.bg-decor{
+  position:fixed;
+  top:0;
+  height:100vh;
+  z-index:-1;
+  opacity:.35;
+  transition:transform .8s cubic-bezier(.2,.8,.2,1);
+}
+.bg-left{left:-5%}
+.bg-right{right:-5%}
 
-        /* --- Hyper-Animated Cards --- */
-        .link-card { 
-            background: rgba(255, 255, 255, 0.02); 
-            backdrop-filter: blur(15px); 
-            border: 1px solid rgba(255, 255, 255, 0.05); 
-            border-radius: 24px; 
-            padding: 1.5rem; 
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            text-decoration: none;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
+.header{
+  background:rgba(0,0,0,.8);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,.1);
+  position:sticky;
+  top:0;
+  z-index:100;
+}
 
-        /* Border Pulse Animation */
-        .link-card::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            border-radius: 24px;
-            padding: 2px;
-            background: linear-gradient(45deg, transparent, var(--accent), transparent);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            opacity: 0;
-            transition: opacity 0.5s;
-        }
+.link-card{
+  background:rgba(255,255,255,.02);
+  backdrop-filter:blur(15px);
+  border:1px solid rgba(255,255,255,.05);
+  border-radius:24px;
+  padding:1.5rem;
+  transition:.45s cubic-bezier(.175,.885,.32,1.275);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  text-decoration:none;
+  position:relative;
+  overflow:hidden;
+}
+.link-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:24px;
+  padding:2px;
+  background:linear-gradient(45deg,transparent,var(--accent),transparent);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  opacity:0;
+  transition:.4s;
+}
+.link-card:hover{
+  transform:scale(1.05) rotateX(5deg) rotateY(-5deg);
+  background:rgba(255,255,255,.05);
+  box-shadow:0 20px 40px rgba(0,0,0,.6),0 0 20px var(--glow);
+}
+.link-card:hover::after{opacity:1}
 
-        .link-card:hover { 
-            transform: scale(1.05) rotateX(5deg) rotateY(-5deg); 
-            background: rgba(255, 255, 255, 0.05);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 20px var(--glow);
-        }
+.tag-yellow{
+  background:rgba(255,230,0,.15);
+  color:#ffe600;
+  border:1px solid rgba(255,230,0,.4);
+  font-size:.65rem;
+  font-weight:900;
+  padding:4px 12px;
+  border-radius:999px;
+  text-transform:uppercase;
+}
 
-        .link-card:hover::after { opacity: 1; }
+.animate-reveal{
+  opacity:0;
+  transform:translateY(40px) scale(.9);
+  animation:reveal .8s cubic-bezier(.2,.8,.2,1) forwards;
+}
+@keyframes reveal{to{opacity:1;transform:none}}
 
-        /* Staggered Reveal */
-        .animate-reveal { 
-            opacity: 0; 
-            transform: translateY(40px) scale(0.9); 
-            animation: revealIn 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-        }
-
-        @keyframes revealIn { to { opacity: 1; transform: translateY(0) scale(1); } }
-
-        .tag-yellow { 
-            background: rgba(255, 230, 0, 0.15); 
-            color: #ffe600; 
-            border: 1px solid rgba(255, 230, 0, 0.4);
-            font-size: 0.65rem;
-            font-weight: 900;
-            padding: 4px 12px;
-            border-radius: 100px;
-            text-transform: uppercase;
-            animation: pulseGlow 2s infinite alternate;
-        }
-
-        @keyframes pulseGlow {
-            from { box-shadow: 0 0 2px var(--glow); }
-            to { box-shadow: 0 0 10px var(--accent); }
-        }
-
-        /* Title Float */
-        .float-title { animation: float 4s ease-in-out infinite; }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-
-    </style>
-<script defer src="https://cloud.umami.is/script.js" data-website-id="08c66f86-eeed-4cda-9d98-d9ecb5756bf1"></script>
+.float-title{animation:float 4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:none}50%{transform:translateY(-10px)}}
+</style>
 </head>
+
 <body>
 
-    <img src="https://next.gitlab.com/images/hero-bg-left.svg" id="bg-l" class="bg-decor bg-left"/>
-    <img src="https://next.gitlab.com/images/hero-bg-right.svg" id="bg-r" class="bg-decor bg-right"/>
+<img src="https://next.gitlab.com/images/hero-bg-left.svg" id="bg-l" class="bg-decor bg-left">
+<img src="https://next.gitlab.com/images/hero-bg-right.svg" id="bg-r" class="bg-decor bg-right">
 
-    <header class="header py-4">
-        <div class="container mx-auto px-6 flex justify-between items-center">
-            <a href="skibidi.html" class="px-4 py-2 bg-white bg-opacity-5 rounded-lg border border-white border-opacity-10 hover:bg-white hover:text-black transition duration-300 font-bold text-xs">BACK</a>
-        </div>
-    </header>
+<header class="header py-4">
+  <div class="container mx-auto px-6 font-black tracking-widest text-sm">
+    DUCKMATH
+  </div>
+</header>
 
-    <main class="container mx-auto px-6 py-20">
-        <div class="text-center mb-16 float-title">
-            <h2 class="text-6xl font-black mb-4 tracking-tighter">Lunaar Links</h2>
-            <p class="text-gray-400 max-w-xl mx-auto font-medium">
-                All mirrors verified. Managed by <span class="text-white border-b-2 border-yellow-500">parcoil</span>. <br>Get all and every site unblocked including over 300 games.
-            </p>
-        </div>
+<main class="container mx-auto px-6 py-20">
 
-        <div id="link-container" class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-            <a href="https://mxd.purplesausage.com/" class="link-card animate-reveal" style="animation-delay: 0.1s">
-                <span class="font-bold text-lg">mxd.purplesausage.com</span>
-                <span class="tag-yellow">Online</span>
-            </a>
-            <a href="https://rtk.xylite.xyz" class="link-card animate-reveal" style="animation-delay: 0.15s">
-                <span class="font-bold text-lg">rtk.xylite.xyz</span>
-                <span class="tag-yellow">Online</span>
-            </a>
-            <a href="https://math.xylite.xyz" class="link-card animate-reveal" style="animation-delay: 0.2s">
-                <span class="font-bold text-lg">math.xylite.xyz</span>
-                <span class="tag-yellow">Online</span>
-            </a>
-            <a href="https://learning.xylite.xyz" class="link-card animate-reveal" style="animation-delay: 0.25s">
-                <span class="font-bold text-lg">learning.xylite.xyz</span>
-                <span class="tag-yellow">Online</span>
-            </a>
-            <a href="https://science.xylite.xyz" class="link-card animate-reveal" style="animation-delay: 0.3s">
-                <span class="font-bold text-lg">science.xylite.xyz</span>
-                <span class="tag-yellow">Online</span>
-            </a>
-            <a href="https://christmasgifts.zyrae.org" class="link-card animate-reveal" style="animation-delay: 0.35s">
-                <span class="font-bold text-lg">christmasgifts.zyrae.org</span>
-                <span class="tag-yellow">Online</span>
-            </a>
-            <a href="https://info.zyrae.org" class="link-card animate-reveal" style="animation-delay: 0.4s">
-                <span class="font-bold text-lg">info.zyrae.org</span>
-                <span class="tag-yellow">Online</span>
-            </a>
-            <a href="https://google.zyrae.org" class="link-card animate-reveal" style="animation-delay: 0.45s">
-                <span class="font-bold text-lg">google.zyrae.org</span>
-                <span class="tag-yellow">Online</span>
-            </a>
-            <a href="https://calc.zyrae.org" class="link-card animate-reveal" style="animation-delay: 0.5s">
-                <span class="font-bold text-lg">calc.zyrae.org</span>
-                <span class="tag-yellow">Online</span>
-            </a>
-            <a href="https://coolteachergifts.camvas.online" class="link-card animate-reveal" style="animation-delay: 0.55s">
-                <span class="font-bold text-lg">coolteachergifts.camvas.online</span>
-                <span class="tag-yellow">Online</span>
-            </a>
-            <a href="https://help.camvas.online" class="link-card animate-reveal" style="animation-delay: 0.6s">
-                <span class="font-bold text-lg">help.camvas.online</span>
-                <span class="tag-yellow">Online</span>
-            </a>
-            <a href="https://ivaluemyeducation.camvas.online" class="link-card animate-reveal" style="animation-delay: 0.65s">
-                <span class="font-bold text-lg">ivaluemyeducation.camvas.online</span>
-                <span class="tag-yellow">Online</span>
-            </a>
-            <a href="https://lotsofscience.camvas.online" class="link-card animate-reveal" style="animation-delay: 0.7s">
-                <span class="font-bold text-lg">lotsofscience.camvas.online</span>
-                <span class="tag-yellow">Online</span>
-            </a>
-        </div>
-    </main>
+<div class="text-center mb-16 float-title">
+  <h1 class="text-6xl font-black mb-4 tracking-tighter">DuckMath</h1>
+  <p class="text-gray-400 max-w-xl mx-auto">
+    Verified mirrors • Games • Math • Learning
+  </p>
+</div>
 
-    <script>
-        // Parallax Mouse Movement for BG and Cards
-        document.addEventListener('mousemove', (e) => {
-            const x = (window.innerWidth / 2 - e.pageX) / 50;
-            const y = (window.innerHeight / 2 - e.pageY) / 50;
-            
-            document.getElementById('bg-l').style.transform = `translateX(${x}px) translateY(${y}px)`;
-            document.getElementById('bg-r').style.transform = `translateX(${-x}px) translateY(${-y}px)`;
-        });
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
 
-        // Interactive Card Tilt
-        const cards = document.querySelectorAll('.link-card');
-        cards.forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const xc = rect.width / 2;
-                const yc = rect.height / 2;
-                const dx = x - xc;
-                const dy = y - yc;
-                card.style.transform = `perspective(1000px) rotateX(${-dy / 10}deg) rotateY(${dx / 10}deg) scale(1.05)`;
-            });
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
-            });
-        });
-    </script>
+<!-- ALL LINKS -->
+<script>
+const links=[
+"duck-math.github.io","duck.classroomcommunity.com","duck.classroom-community.com","duck.classroom.onl",
+"classroom.community","gratis.ro","duck.classroomgeometry.com","gamesforpi.com","duck.gameacademy.ro",
+"povesti.ro","steam.gift","edysgames.com","creatii.ro","friv-2023.com","duck.freezenova.ai","freezenova.ro",
+"gametube.io","freegames.onl","freemathstudy.com","duck.freezenova.chat","duck.forcez.io","duckmath.games",
+"duckmathgames.com","duck.adoluxgames.com","duck.freezenova.blog","jocuripentrucopii.ro","lich.com",
+"onlinegames.ro","duck.scienceunblocked.com","freezenova.net","duck.revenuegames.com",
+"math.study.cadou.ro.cdn.cloudflare.net","duck.classroom.community.cdn.cloudflare.net",
+"math.classroom.onl.cdn.cloudflare.net","mathlessons.b-cdn.net","quack-learn.web.app",
+"quack-learn.firebaseapp.com","duck.tinyexams.com","duckmath.global.ssl.fastly.net",
+"duck.theducklair.com","duck.deepresearch2markdown.com","stealabrainrot.gitlab.io",
+"login-live.blogbott.com","duck.alltutors.org","duck.quackprep.com","duckmath.org","nullxiety.com",
+"quizquack.com","ducklit.com","unblockedschoolgames.org","alwaysunblocked.com",
+"retro-bowl-college.uk","ducksum.com","ducky-ea0.pages.dev","openexams.net",
+"unblocked-games.school","duckmath.pages.dev","learn-duck.firebaseapp.com",
+"quackprep.org","learn-duck.web.app"
+];
+document.write(
+  links.map((l,i)=>`
+<a href="https://${l}" class="link-card animate-reveal" style="animation-delay:${i*0.03}s">
+  <span class="font-bold">${l}</span>
+  <span class="tag-yellow">Online</span>
+</a>`).join("")
+);
+</script>
+
+</div>
+</main>
+
+<script>
+document.addEventListener("mousemove",e=>{
+  const x=(innerWidth/2-e.pageX)/50;
+  const y=(innerHeight/2-e.pageY)/50;
+  bg-l.style.transform=`translate(${x}px,${y}px)`;
+  bg-r.style.transform=`translate(${-x}px,${-y}px)`;
+});
+</script>
+
 </body>
 </html>
