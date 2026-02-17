@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unblocked Games Hub</title>
+    <meta name="theme-color" content="#000000"> 
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-image: url('background.avif');
+            --glass-bg: rgba(255, 255, 255, 0.2);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --text-color: #1d1d1f;
+            --btn-bg: rgba(255, 255, 255, 0.3);
+            --btn-hover: rgba(255, 255, 255, 0.5);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-image: url('background.avif');
+                --glass-bg: rgba(0, 0, 0, 0.4);
+                --glass-border: rgba(255, 255, 255, 0.1);
+                --text-color: #ffffff;
+                --btn-bg: rgba(255, 255, 255, 0.1);
+                --btn-hover: rgba(255, 255, 255, 0.15);
+            }
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-image) no-repeat center center fixed;
+            background-size: cover;
+            color: var(--text-color);
+            transition: background 0.5s ease;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px) saturate(160%);
+            -webkit-backdrop-filter: blur(25px) saturate(160%);
+            border: 1px solid var(--glass-border);
+            border-radius: 2.5rem;
+            padding: 3rem;
+            width: 90%;
+            max-width: 480px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            transition: all 0.5s ease;
+        }
+
+        .glass-button {
+            display: block;
+            width: 100%;
+            padding: 1.1rem;
+            margin: 1rem 0;
+            background: var(--btn-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 1.2rem;
+            color: var(--text-color);
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+        }
+
+        .glass-button:hover {
+            background: var(--btn-hover);
+            transform: translateY(-4px) scale(1.02);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .glass-button:active {
+            transform: scale(0.97);
+        }
+
+        h1 {
+            letter-spacing: -0.05em;
+            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+        }
+
+        .subtitle {
+            font-size: 0.95rem;
+            opacity: 0.7;
+            margin-bottom: 2.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glass-panel">
+        <h1>Welcome</h1>
+        <p class="subtitle">Select an option below</p>
+        <p class="subtitle">We strongly urge you to use the new version, but it isn't finished yet</p> 
+        
+        <a href="not-supported/v12/ahw101/index.html" class="glass-button">
+            Older Version 
+        </a>
+
+  
+                        <a href="https://ahw101.github.io/new-website/" class="glass-button">
+            New Site
+        </a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const buttons = document.querySelectorAll('.glass-button');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if(href !== '#' && !href.startsWith('http')) {
+                        e.preventDefault();
+                        document.body.style.opacity = '0';
+                        document.body.style.transition = 'opacity 0.4s ease';
+                        setTimeout(() => {
+                            window.location.href = href;
+                        }, 400);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

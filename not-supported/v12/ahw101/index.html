@@ -1,0 +1,293 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ahw101 // HyperHub</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --canary-orange: #ff4500;
+            --accent-purple: #a855f7;
+            --accent-blue: #63b3ed;
+            --bg-dark: #000000;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-dark);
+            color: #e2e8f0;
+            line-height: 1.6;
+            margin: 0;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* --- Custom Scrollbar --- */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #222; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-purple); }
+
+        /* --- Background SVGs --- */
+        .bg-decor {
+            position: fixed;
+            top: 0;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.35;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .bg-left { left: 0; }
+        .bg-right { right: 0; }
+
+        /* --- Canary Modal --- */
+        #canary-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-card {
+            background: #0f172a;
+            padding: 3rem;
+            border-radius: 2rem;
+            border: 2px solid var(--canary-orange);
+            text-align: center;
+            box-shadow: 0 0 60px rgba(255, 69, 0, 0.3);
+            transform: scale(0.9);
+            animation: modalIn 0.5s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes modalIn { to { transform: scale(1); opacity: 1; } }
+
+        /* --- Header --- */
+        .header {
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(20px);
+            padding: 1.25rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* --- Animations --- */
+        .animate-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .reveal-visible { opacity: 1; transform: translateY(0); }
+
+        .animate-gradient-text {
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple), #ff8a00, var(--accent-blue));
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-flow 6s linear infinite;
+        }
+        @keyframes gradient-flow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 300% 50%; }
+        }
+
+        .section-box {
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 30px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .button-primary {
+            display: inline-block;
+            background: rgba(255,255,255,0.05);
+            color: #fff;
+            font-weight: 700;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            border: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+        }
+        .button-primary:hover {
+            transform: translateY(-3px);
+            background: var(--accent-blue);
+            color: #000;
+            box-shadow: 0 10px 20px rgba(99, 179, 237, 0.3);
+        }
+        .button-purple { background: rgba(168, 85, 247, 0.1); border-color: var(--accent-purple); color: var(--accent-purple); }
+        .button-purple:hover { background: var(--accent-purple); color: white; }
+
+        .game-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.4s ease;
+            text-decoration: none;
+        }
+        .game-card:hover {
+            background: rgba(168, 85, 247, 0.08);
+            border-color: var(--accent-purple);
+            transform: translateY(-5px);
+        }
+
+        .description-text { font-size: 0.75rem; color: #64748b; margin-top: 0.5rem; }
+    </style>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="08c66f86-eeed-4cda-9d98-d9ecb5756bf1"></script>
+</head>
+<body>
+
+    <div id="canary-modal">
+        <div class="modal-card">
+            <h2 class="text-3xl font-black text-white mb-2">🧪 CANARY MODE</h2>
+            <p class="text-slate-400 mb-8">Experimental Build V.2025.12</p>
+            <button onclick="closeModal()" class="button-primary w-full button-purple">Continue <span>&rarr;</span></button>
+        </div>
+    </div>
+
+    <img src="https://next.gitlab.com/images/hero-bg-left.svg" id="bg-l" class="bg-decor bg-left"/>
+    <img src="https://next.gitlab.com/images/hero-bg-right.svg" id="bg-r" class="bg-decor bg-right"/>
+
+    <header class="header">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <h1 class="text-2xl font-black animate-gradient-text">ahw101 Hub</h1>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6">
+        <section class="py-20 text-center">
+            <h2 class="text-5xl md:text-7xl font-black text-white mb-6 tracking-tighter">
+                Portal to <span id="dynamic-hero" class="animate-gradient-text">Uninterrupted Fun!</span>
+            </h2>
+            <p class="text-lg text-slate-400 max-w-2xl mx-auto mb-6 animate-reveal">
+                A premium collection of proxies and unblocked experiences. No limits, just gaming bliss.
+            </p>
+            <p class="text-xs font-mono text-gray-600 uppercase tracking-widest animate-reveal mb-10">Updated: December 21, 2025</p>
+        </section>
+
+        <section id="games-list" class="pb-20 animate-reveal">
+            <h3 class="text-xs font-black text-blue-400 uppercase tracking-widest mb-8 text-center">Top picks</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <a href="monkeygg2.html" target="_blank" class="game-card">
+                    <span class="font-bold text-white">MonkeyGG2 ahw101</span>
+                    <span class="text-xs text-green-400 font-bold">Online</span>
+                </a>
+                <a href='home.html' class="game-card">
+                    <span class="font-bold text-white">More Links</span>
+                    <span class="text-xs text-green-400 font-bold">Online ✅</span>
+                </a>
+                <a href="download.html" class="game-card" style="border-color: #f59e0b;">
+                    <span class="font-bold text-yellow-500">Lunaar.org</span>
+                    <span class="text-xs text-yellow-500 font-bold">Best 🔥</span>
+                </a>
+                                <a href="duck.html" class="game-card" style="border-color: #f59e0b;">
+                    <span class="font-bold text-yellow-500">Duckmath</span>
+                    <span class="text-xs text-orange-500 font-bold">Best for games</span>
+                </a>
+                <a href="now.gg.txt" class="game-card">
+                    <span class="font-bold text-white">now.gg Links</span>
+                </a>
+            </div>
+        </section>
+
+        <div class="section-box animate-reveal">
+            <h3 class="text-xs font-black text-purple-400 uppercase tracking-widest mb-10">Navigation Matrix</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div>
+                    <h4 class="text-xl font-bold text-white mb-6">Quick Links</h4>
+                    <div class="space-y-6">
+                        <div>
+                            <a href="#games-list" class="button-primary w-full md:w-max">Games</a>
+                            <p class="description-text">Jump straight to our top game picks.</p>
+                        </div>
+                        <div>
+                            <a href="#about" class="button-primary w-full md:w-max">Developer Credits</a>
+                            <p class="description-text">Find out who built this hub.</p>
+                        </div>
+                        <div>
+                            <a href="https://github.com/ahw101/unblocked-games-for-life/" class="button-primary w-full md:w-max">GitHub Source</a>
+                            <p class="description-text">Will link you to GitHub! Sorry my GitHub is so clogged, will try and sort that out...</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold text-purple-400 mb-6">Other Cool Stuff</h4>
+                    <div class="space-y-6">
+                        <div>
+                            <a href="https://gamesbyedward.vercel.app/" class="button-primary button-purple w-full md:w-max">Core Arcade (New!)</a>
+                            <p class="description-text">This new one can only be used for HTML games. In beta! Expect Bugs!</p>
+                        </div>
+                        <div>
+                            <a href="nettleweb.html"  class="button-primary w-full md:w-max">Nettleweb</a>
+                            <p class="description-text">A massive collection of unblocked links and resources.</p>
+                        </div>
+                        <div>
+                            <a href="https://ambient-ahw101.vercel.app/" class="button-primary w-full md:w-max">Ambient Proxy</a>
+                            <p class="description-text">Unblock YouTube, Social Media, AI, and more.</p>
+                        </div>
+                        <div>
+                            <a href="https://chromebook-utilities.pages.dev/" class="button-primary w-full md:w-max">Chromebook Proxies</a>
+                            <p class="description-text">Unlock advanced utilities on your chromebook. Including lots of links for now.gg! Not made by me.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section id="about" class="pb-32 text-center animate-reveal">
+            <div class="section-box max-w-2xl mx-auto">
+                <h3 class="text-xl font-bold text-white mb-4">Who made this?</h3>
+                <p class="text-slate-300">This website was coded by <strong>ahw101</strong>.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-10 text-center border-t border-white border-opacity-5">
+        <p class="text-xs text-gray-600 uppercase tracking-widest">© 2025-2026 // ahw101 // Uninterrupted Access</p>
+    </footer>
+
+    <script>
+        // Reveal on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('reveal-visible');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.animate-reveal').forEach(el => observer.observe(el));
+
+        // Parallax Background
+        document.addEventListener('mousemove', (e) => {
+            const x = (window.innerWidth - e.pageX * 2) / 100;
+            const y = (window.innerHeight - e.pageY * 2) / 100;
+            document.getElementById('bg-l').style.transform = `translateX(${x}px) translateY(${y}px)`;
+            document.getElementById('bg-r').style.transform = `translateX(${-x}px) translateY(${-y}px)`;
+        });
+
+        function closeModal() { document.getElementById('canary-modal').style.display = 'none'; }
+
+        // Secret Switcher
+        let lastShift = 0;
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Shift') {
+                const now = Date.now();
+                if (now - lastShift < 400) window.location.href = 'switcher.html';
+                lastShift = now;
+            }
+        });
+    </script>
+</body>
+</html>

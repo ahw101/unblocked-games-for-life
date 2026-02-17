@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DuckMath // HyperHub</title>
+
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --accent:#facc15;
+  --bg:#000;
+  --glow:rgba(250,204,21,.4);
+}
+body{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  background:var(--bg);
+  color:#fff;
+  margin:0;
+  overflow-x:hidden;
+  perspective:1000px;
+}
+.bg-decor{
+  position:fixed;
+  top:0;
+  height:100vh;
+  z-index:-1;
+  opacity:.35;
+  transition:transform .8s cubic-bezier(.2,.8,.2,1);
+}
+.bg-left{left:-5%}
+.bg-right{right:-5%}
+
+.header{
+  background:rgba(0,0,0,.8);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,.1);
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.link-card{
+  background:rgba(255,255,255,.02);
+  backdrop-filter:blur(15px);
+  border:1px solid rgba(255,255,255,.05);
+  border-radius:24px;
+  padding:1.5rem;
+  transition:.45s cubic-bezier(.175,.885,.32,1.275);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  text-decoration:none;
+  position:relative;
+  overflow:hidden;
+}
+.link-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:24px;
+  padding:2px;
+  background:linear-gradient(45deg,transparent,var(--accent),transparent);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  opacity:0;
+  transition:.4s;
+}
+.link-card:hover{
+  transform:scale(1.05) rotateX(5deg) rotateY(-5deg);
+  background:rgba(255,255,255,.05);
+  box-shadow:0 20px 40px rgba(0,0,0,.6),0 0 20px var(--glow);
+}
+.link-card:hover::after{opacity:1}
+
+.tag-yellow{
+  background:rgba(255,230,0,.15);
+  color:#ffe600;
+  border:1px solid rgba(255,230,0,.4);
+  font-size:.65rem;
+  font-weight:900;
+  padding:4px 12px;
+  border-radius:999px;
+  text-transform:uppercase;
+}
+
+.animate-reveal{
+  opacity:0;
+  transform:translateY(40px) scale(.9);
+  animation:reveal .8s cubic-bezier(.2,.8,.2,1) forwards;
+}
+@keyframes reveal{to{opacity:1;transform:none}}
+
+.float-title{animation:float 4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:none}50%{transform:translateY(-10px)}}
+</style>
+</head>
+
+<body>
+
+<img src="https://next.gitlab.com/images/hero-bg-left.svg" id="bg-l" class="bg-decor bg-left">
+<img src="https://next.gitlab.com/images/hero-bg-right.svg" id="bg-r" class="bg-decor bg-right">
+
+<header class="header py-4">
+  <div class="container mx-auto px-6 font-black tracking-widest text-sm">
+    DUCKMATH
+  </div>
+</header>
+
+<main class="container mx-auto px-6 py-20">
+
+<div class="text-center mb-16 float-title">
+  <h1 class="text-6xl font-black mb-4 tracking-tighter">DuckMath</h1>
+  <p class="text-gray-400 max-w-xl mx-auto">
+    Verified mirrors • Games • Math • Learning
+  </p>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+
+<!-- ALL LINKS -->
+<script>
+const links=[
+"duck-math.github.io","duck.classroomcommunity.com","duck.classroom-community.com","duck.classroom.onl",
+"classroom.community","gratis.ro","duck.classroomgeometry.com","gamesforpi.com","duck.gameacademy.ro",
+"povesti.ro","steam.gift","edysgames.com","creatii.ro","friv-2023.com","duck.freezenova.ai","freezenova.ro",
+"gametube.io","freegames.onl","freemathstudy.com","duck.freezenova.chat","duck.forcez.io","duckmath.games",
+"duckmathgames.com","duck.adoluxgames.com","duck.freezenova.blog","jocuripentrucopii.ro","lich.com",
+"onlinegames.ro","duck.scienceunblocked.com","freezenova.net","duck.revenuegames.com",
+"math.study.cadou.ro.cdn.cloudflare.net","duck.classroom.community.cdn.cloudflare.net",
+"math.classroom.onl.cdn.cloudflare.net","mathlessons.b-cdn.net","quack-learn.web.app",
+"quack-learn.firebaseapp.com","duck.tinyexams.com","duckmath.global.ssl.fastly.net",
+"duck.theducklair.com","duck.deepresearch2markdown.com","stealabrainrot.gitlab.io",
+"login-live.blogbott.com","duck.alltutors.org","duck.quackprep.com","duckmath.org","nullxiety.com",
+"quizquack.com","ducklit.com","unblockedschoolgames.org","alwaysunblocked.com",
+"retro-bowl-college.uk","ducksum.com","ducky-ea0.pages.dev","openexams.net",
+"unblocked-games.school","duckmath.pages.dev","learn-duck.firebaseapp.com",
+"quackprep.org","learn-duck.web.app"
+];
+document.write(
+  links.map((l,i)=>`
+<a href="https://${l}" class="link-card animate-reveal" style="animation-delay:${i*0.03}s">
+  <span class="font-bold">${l}</span>
+  <span class="tag-yellow">Online</span>
+</a>`).join("")
+);
+</script>
+
+</div>
+</main>
+
+<script>
+document.addEventListener("mousemove",e=>{
+  const x=(innerWidth/2-e.pageX)/50;
+  const y=(innerHeight/2-e.pageY)/50;
+  bg-l.style.transform=`translate(${x}px,${y}px)`;
+  bg-r.style.transform=`translate(${-x}px,${-y}px)`;
+});
+</script>
+
+</body>
+</html>
